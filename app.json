@@ -1,0 +1,12 @@
+{
+  "name": "Bubs",
+  "displayName": "Bubs",
+  "expo": {
+    "name": "Bubs",
+    "slug": "Bubs",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
