@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import Menu from "./components/menu";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
@@ -9,6 +11,16 @@ const fetchFonts = () => {
     "press-start": require("./assets/fonts/PressStart2P-Regular.ttf"),
   });
 };
+
+const Stack = createStackNavigator();
+
+function MenuScreen() {
+  return (
+    <View style={styles.container}>
+      <Menu></Menu>
+    </View>
+  );
+}
 
 export default function App() {
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -23,9 +35,11 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Menu></Menu>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Menu" component={MenuScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

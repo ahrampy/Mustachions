@@ -9,6 +9,12 @@ export default () => {
         <TouchableOpacity style={[styles.center, styles.button]}>
           <Text style={styles.text}>Start</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={[styles.center, styles.button]}>
+          <Text style={styles.text}>Options</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.center, styles.button]}>
+          <Text style={styles.text}>Quit</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -26,19 +32,21 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   menu: {
-    width: `${Screen.width * 0.6}px`,
-    height: `${Screen.height * 0.8}px`,
+    width: Screen.width * 0.6,
+    height: Screen.height * 0.8,
     backgroundColor: "rgba(250, 250, 250, .8)",
     borderRadius: 5,
   },
   button: {
-    width: "80%",
-    height: "25%",
+    width: "100%",
+    height: "15%",
+    padding: 15,
+    margin: 15,
     borderWidth: 5,
     // borderRadius: 5
   },
   text: {
-    fontSize: 50,
+    fontSize: 20,
     fontFamily: "press-start",
   },
 });
