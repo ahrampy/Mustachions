@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Menu from "./components/menu";
+import Options from "./components/options";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 
@@ -14,10 +15,18 @@ const fetchFonts = () => {
 
 const Stack = createStackNavigator();
 
-function MenuScreen() {
+function MenuScreen({navigation}: any) {
   return (
     <View style={styles.container}>
-      <Menu></Menu>
+      <Menu navigation={navigation}></Menu>
+    </View>
+  );
+}
+
+function OptionsScreen() {
+  return (
+    <View style={styles.container}>
+      <Options></Options>
     </View>
   );
 }
@@ -36,8 +45,9 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Menu">
         <Stack.Screen name="Menu" component={MenuScreen} />
+        <Stack.Screen name="Options" component={OptionsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
