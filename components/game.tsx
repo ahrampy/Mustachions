@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     fontFamily: "press-start",
   },
   gif: {
-    width: Screen.width * 0.6,
     height: Screen.height * 0.5,
   },
 });
