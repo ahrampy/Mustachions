@@ -2,12 +2,10 @@ import React from "react";
 import { TouchableOpacity, Image, Text, StyleSheet, View } from "react-native";
 import Screen from "../constants/screen";
 
-export default () => {
+export default (props: any) => {
   return (
     <View style={[styles.center, styles.container]}>
-      <View style={[styles.center, styles.menu]}>
-        <Text style={styles.text}>Options</Text>
-      </View>
+      <Text style={styles.text}>Game</Text>
     </View>
   );
 };
@@ -23,12 +21,12 @@ const styles = StyleSheet.create({
     height: Screen.height,
     backgroundColor: "white",
   },
-  menu: {
-    width: Screen.width * 0.8,
-    height: Screen.height * 0.8,
-    backgroundColor: "rgba(250, 250, 250, .8)",
-    borderRadius: 5,
-  },
+  // menu: {
+  //   width: Screen.width * 0.6,
+  //   height: Screen.height * 0.8,
+  //   backgroundColor: "rgba(250, 250, 250, .8)",
+  //   borderRadius: 5,
+  // },
   // button: {
   //   width: "100%",
   //   height: "15%",

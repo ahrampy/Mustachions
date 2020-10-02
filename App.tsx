@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Menu from "./components/menu";
 import Options from "./components/options";
+import Game from "./components/game";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 
@@ -15,10 +16,18 @@ const fetchFonts = () => {
 
 const Stack = createStackNavigator();
 
-function MenuScreen({navigation}: any) {
+function MenuScreen({ navigation }: any) {
   return (
     <View style={styles.container}>
       <Menu navigation={navigation}></Menu>
+    </View>
+  );
+}
+
+function GameScreen({ navigation }: any) {
+  return (
+    <View style={styles.container}>
+      <Game navigation={navigation}></Game>
     </View>
   );
 }
@@ -45,9 +54,21 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Menu">
+      <Stack.Navigator
+        initialRouteName="Menu"
+        screenOptions={{
+          // headerStyle: {
+          //   backgroundColor: "#f4511e",
+          // },
+          // headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontFamily: "press-start",
+          },
+        }}
+      >
         <Stack.Screen name="Menu" component={MenuScreen} />
         <Stack.Screen name="Options" component={OptionsScreen} />
+        <Stack.Screen name="Game" component={GameScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

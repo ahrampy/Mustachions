@@ -6,17 +6,17 @@ export default (props: any) => {
   return (
     <View style={[styles.center, styles.container]}>
       <View style={[styles.center, styles.menu]}>
-        <TouchableOpacity style={[styles.center, styles.button]}>
+        <TouchableOpacity
+          style={[styles.center, styles.button]}
+          onPress={() => props.navigation.navigate("Game")}
+        >
           <Text style={styles.text}>Start</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.center, styles.button]}
+          style={[styles.center, styles.button, {height: "10%"}]}
           onPress={() => props.navigation.navigate("Options")}
         >
           <Text style={styles.text}>Options</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.center, styles.button]}>
-          <Text style={styles.text}>Quit</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -45,11 +45,11 @@ const styles = StyleSheet.create({
     height: "15%",
     padding: 15,
     margin: 15,
-    borderWidth: 5,
+    borderWidth: 2,
     // borderRadius: 5
   },
   text: {
-    fontSize: 20,
+    // fontSize: 20,
     fontFamily: "press-start",
   },
 });
