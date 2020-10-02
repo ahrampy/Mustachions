@@ -56,14 +56,14 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Menu"
+        initialRouteName="Mustachions"
         screenOptions={{
           headerTitleStyle: {
             fontFamily: "press-start",
           },
         }}
       >
-        <Stack.Screen name="Menu" component={MenuScreen} />
+        <Stack.Screen name="Mustachions" component={MenuScreen} />
         <Stack.Screen name="Options" component={OptionsScreen} />
         <Stack.Screen
           name="Game"

@@ -5,7 +5,7 @@ import Screen from "../constants/screen";
 export default () => {
   return (
     <View style={[styles.center, styles.container]}>
-      <Text style={styles.text}>Game</Text>
+      <Image style={styles.gif} source={require("../assets/images/test.gif")}></Image>
     </View>
   );
 };
@@ -39,4 +39,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: "press-start",
   },
+  gif: {
+    width: Screen.width * .6,
+    height: Screen.height * .5
+  }
 });
