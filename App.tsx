@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import Screen from "./constants/screen";
 import Menu from "./components/menu";
 import Options from "./components/options";
 import Game from "./components/game";
@@ -24,18 +25,18 @@ function MenuScreen({ navigation }: any) {
   );
 }
 
-function GameScreen({ navigation }: any) {
+function GameScreen() {
   return (
     <View style={styles.container}>
-      <Game navigation={navigation}></Game>
+      <Game></Game>
     </View>
   );
 }
 
-function OptionsScreen() {
+function OptionsScreen({ navigation }: any) {
   return (
     <View style={styles.container}>
-      <Options></Options>
+      <Options navigation={navigation}></Options>
     </View>
   );
 }
@@ -57,10 +58,6 @@ export default function App() {
       <Stack.Navigator
         initialRouteName="Menu"
         screenOptions={{
-          // headerStyle: {
-          //   backgroundColor: "#f4511e",
-          // },
-          // headerTintColor: "#fff",
           headerTitleStyle: {
             fontFamily: "press-start",
           },
@@ -68,7 +65,25 @@ export default function App() {
       >
         <Stack.Screen name="Menu" component={MenuScreen} />
         <Stack.Screen name="Options" component={OptionsScreen} />
-        <Stack.Screen name="Game" component={GameScreen} />
+        <Stack.Screen
+          name="Game"
+          component={GameScreen}
+          options={({ navigation }) => ({
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={() => navigation.navigate("Options")}
+                // color="#333"
+              >
+                <Image
+                  source={require("./assets/images/settings.png")}
+                  style={styles.settings}
+                ></Image>
+              </TouchableOpacity>
+            ),
+            headerLeft: () => <View></View>,
+            headerTitle: () => <View></View>,
+          })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -81,5 +96,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  settings: {
+    width: 25,
+    height: 25,
+    right: Screen.width * 0.02,
   },
 });

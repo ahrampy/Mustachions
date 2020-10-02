@@ -2,7 +2,7 @@ import React from "react";
 import { TouchableOpacity, Image, Text, StyleSheet, View } from "react-native";
 import Screen from "../constants/screen";
 
-export default (props: any) => {
+export default () => {
   return (
     <View style={[styles.center, styles.container]}>
       <Text style={styles.text}>Game</Text>

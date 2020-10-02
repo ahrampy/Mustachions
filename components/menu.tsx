@@ -13,7 +13,7 @@ export default (props: any) => {
           <Text style={styles.text}>Start</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.center, styles.button, {height: "10%"}]}
+          style={[styles.center, styles.button]}
           onPress={() => props.navigation.navigate("Options")}
         >
           <Text style={styles.text}>Options</Text>
