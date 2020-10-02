@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   container: {
     width: Screen.width,
     height: Screen.height,
-    backgroundColor: "white",
+    backgroundColor: "#C0BC95",
   },
   // menu: {
   //   width: Screen.width * 0.6,
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     fontFamily: "press-start",
   },
   gif: {
-    width: Screen.width * .6,
-    height: Screen.height * .5
-  }
+    width: Screen.width * 0.6,
+    height: Screen.height * 0.5,
+  },
 });

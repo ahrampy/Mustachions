@@ -69,6 +69,9 @@ export default function App() {
           name="Game"
           component={GameScreen}
           options={({ navigation }) => ({
+            headerStyle: {
+              backgroundColor: "#C0BC95",
+            },
             headerRight: () => (
               <TouchableOpacity
                 onPress={() => navigation.navigate("Options")}
