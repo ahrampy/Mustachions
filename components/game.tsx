@@ -15,37 +15,28 @@ export default () => {
   return (
     <View style={styles.container}>
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
         horizontal={true}
         bounces={false}
       >
-        <Image
+        <ImageBackground
           style={styles.bg}
           source={require("../assets/images/bg.jpg")}
-        ></Image>
+        ></ImageBackground>
       </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  // center: {
-  //   display: "flex",
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  // },
   container: {
     flex: 1,
-    // width: Screen.width,
     height: Screen.height,
-    // backgroundColor: "#C0BC95",
   },
   text: {
     fontSize: 20,
     fontFamily: "press-start",
   },
   bg: {
-    resizeMode: "cover",
     height: Screen.height * 0.95,
     width: Screen.height * 0.95 * 1.125,
   },
