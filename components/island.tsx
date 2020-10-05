@@ -5,7 +5,11 @@ import Screen from "../constants/screen";
 export default () => {
   return (
     <View style={[styles.center, styles.container]}>
-      <Image style={styles.gif} source={require("../assets/images/test.gif")}></Image>
+      <Text>I'm the same but also dead {":)"}</Text>
+      <Image
+        style={styles.gif}
+        source={require("../assets/images/test.gif")}
+      ></Image>
     </View>
   );
 };

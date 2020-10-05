@@ -3,6 +3,7 @@ import { TouchableOpacity, Image, Text, StyleSheet, View } from "react-native";
 import Screen from "../constants/screen";
 
 export default (props: any) => {
+  // TODO hide island until needed
   return (
     <View style={[styles.center, styles.container]}>
       <View style={[styles.center, styles.menu]}>
@@ -14,9 +15,21 @@ export default (props: any) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.center, styles.button]}
+          onPress={() => props.navigation.navigate("Store")}
+        >
+          <Text style={styles.text}>Store</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.center, styles.button]}
           onPress={() => props.navigation.navigate("Options")}
         >
           <Text style={styles.text}>Options</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.center, styles.button]}
+          onPress={() => props.navigation.navigate("Island")}
+        >
+          <Text style={styles.text}>Island</Text>
         </TouchableOpacity>
       </View>
     </View>
