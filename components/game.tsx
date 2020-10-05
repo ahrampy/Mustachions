@@ -1,31 +1,52 @@
 import React from "react";
-import { TouchableOpacity, Image, Text, StyleSheet, View } from "react-native";
+import {
+  Pressable,
+  Image,
+  Text,
+  StyleSheet,
+  View,
+  ScrollView,
+  ImageBackground,
+} from "react-native";
 import Screen from "../constants/screen";
 
 export default () => {
+  // * DOCS: https://reactnative.dev/docs/scrollview
   return (
-    <View style={[styles.center, styles.container]}>
-      <Image style={styles.gif} source={require("../assets/images/test.gif")}></Image>
+    <View style={styles.container}>
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        horizontal={true}
+        bounces={false}
+      >
+        <Image
+          style={styles.bg}
+          source={require("../assets/images/bg.jpg")}
+        ></Image>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  center: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
+  // center: {
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  // },
   container: {
-    width: Screen.width,
+    flex: 1,
+    // width: Screen.width,
     height: Screen.height,
-    backgroundColor: "#C0BC95",
+    // backgroundColor: "#C0BC95",
   },
   text: {
     fontSize: 20,
     fontFamily: "press-start",
   },
-  gif: {
-    height: Screen.height * 0.5,
+  bg: {
+    resizeMode: "cover",
+    height: Screen.height * 0.95,
+    width: Screen.height * 0.95 * 1.125,
   },
 });

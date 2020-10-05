@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, Image, Text, StyleSheet, View } from "react-native";
+import { Pressable, Image, Text, StyleSheet, View } from "react-native";
 import Screen from "../constants/screen";
 
 export default (props: any) => {
@@ -7,30 +7,30 @@ export default (props: any) => {
   return (
     <View style={[styles.center, styles.container]}>
       <View style={[styles.center, styles.menu]}>
-        <TouchableOpacity
+        <Pressable
           style={[styles.center, styles.button]}
           onPress={() => props.navigation.navigate("Game")}
         >
           <Text style={styles.text}>Start</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </Pressable>
+        <Pressable
           style={[styles.center, styles.button]}
           onPress={() => props.navigation.navigate("Store")}
         >
           <Text style={styles.text}>Store</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </Pressable>
+        <Pressable
           style={[styles.center, styles.button]}
           onPress={() => props.navigation.navigate("Options")}
         >
           <Text style={styles.text}>Options</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </Pressable>
+        <Pressable
           style={[styles.center, styles.button]}
           onPress={() => props.navigation.navigate("Island")}
         >
           <Text style={styles.text}>Island</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );

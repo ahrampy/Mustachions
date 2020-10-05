@@ -1,11 +1,11 @@
 import React from "react";
-import { TouchableOpacity, Image, Text, StyleSheet, View } from "react-native";
+import { Pressable, Image, Text, StyleSheet, View } from "react-native";
 import Screen from "../constants/screen";
 
 export default () => {
   return (
     <View style={[styles.center, styles.container]}>
-      <Text>I'm the same but also dead {":)"}</Text>
+      <Text>oh no where am i?</Text>
       <Image
         style={styles.gif}
         source={require("../assets/images/test.gif")}

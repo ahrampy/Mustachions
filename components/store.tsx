@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, Image, Text, StyleSheet, View } from "react-native";
+import { Pressable, Image, Text, StyleSheet, View } from "react-native";
 import Screen from "../constants/screen";
 
 export default (props: any) => {
@@ -7,12 +7,12 @@ export default (props: any) => {
     <View style={[styles.center, styles.container]}>
       <View style={[styles.center, styles.menu]}>
         <Text style={styles.text}>Buy Some Shit</Text>
-        <TouchableOpacity
+        <Pressable
           style={[styles.center, styles.button]}
           onPress={() => props.navigation.popToTop()}
         >
           <Text style={styles.text}>Main Menu</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, View, Pressable, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Screen from "./constants/screen";
@@ -101,7 +101,7 @@ export default function App() {
               backgroundColor: "#C0BC95",
             },
             headerRight: () => (
-              <TouchableOpacity
+              <Pressable
                 onPress={() => navigation.navigate("Options")}
                 // color="#333"
               >
@@ -109,7 +109,7 @@ export default function App() {
                   source={require("./assets/images/settings.png")}
                   style={styles.settings}
                 ></Image>
-              </TouchableOpacity>
+              </Pressable>
             ),
             headerLeft: () => <View></View>,
             headerTitle: () => <View></View>,
