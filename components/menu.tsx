@@ -17,7 +17,7 @@ export default (props: any) => {
           style={[styles.center, styles.button]}
           onPress={() => props.navigation.navigate("Store")}
         >
-          <Text style={styles.text}>Store</Text>
+          <Text style={styles.text}>Store {"(maybe from in game)"}</Text>
         </Pressable>
         <Pressable
           style={[styles.center, styles.button]}
@@ -29,7 +29,7 @@ export default (props: any) => {
           style={[styles.center, styles.button]}
           onPress={() => props.navigation.navigate("Island")}
         >
-          <Text style={styles.text}>Island</Text>
+          <Text style={styles.text}>Island {"(initially hidden)"}</Text>
         </Pressable>
       </View>
     </View>
