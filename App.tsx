@@ -10,6 +10,9 @@ import Game from "./components/game";
 import Island from "./components/island";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
+import * as SQLite from 'expo-sqlite';
+
+const db = SQLite.openDatabase("mustachions");
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -62,7 +65,7 @@ function OptionsScreen({ navigation }: any) {
 export default function App() {
   const [dataLoaded, setDataLoaded] = useState(false);
 
-  if (!dataLoaded) {
+  if (!dataLoaded || !db) {
     return (
       <AppLoading
         startAsync={fetchFonts}

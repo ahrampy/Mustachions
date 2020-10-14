@@ -9,7 +9,7 @@ import {
   Modal,
 } from "react-native";
 import Screen from "../constants/screen";
-// import { GameLoop } from "react-native-game-engine";
+import { GameLoop } from "react-native-game-engine";
 
 // * DOCS
 //  * SCROLLVIEW: https://reactnative.dev/docs/scrollview
@@ -17,19 +17,19 @@ import Screen from "../constants/screen";
 // *
 
 export default () => {
-  // function update({ touches, screen, layout, time }: any) {
-  //   let press = touches.find((x: any) => x.type === "press");
-  //   if (press) {
-  //     console.log(press);
-  //     console.log(time);
-  //   }
-  // }
-  const [introVisible, setIntroVisible] = useState(true);
+  function update({ touches, screen, layout, time }: any) {
+    let press = touches.find((x: any) => x.type === "press");
+    if (press) {
+      // console.log(press); // !
+      // console.log(time); // !
+    }
+  }
+  const [introVisible, setIntroVisible] = useState(true); // !! testing
 
   useEffect(() => {
     let closeIntro = setTimeout(() => {
       setIntroVisible(false);
-    }, 9500);
+    }, 9000);
     return () => {
       clearTimeout(closeIntro);
     };
@@ -45,10 +45,20 @@ export default () => {
       </Modal>
       <ScrollView horizontal={true} bounces={false}>
         <ImageBackground
-          style={styles.bg}
+          style={styles.image}
           source={require("../assets/images/temp/bg.jpg")}
+          // source={require("../assets/images/room.jpg")}
         >
-          {/* <GameLoop onUpdate={update}></GameLoop> */}
+          <GameLoop onUpdate={update}>
+            {/* <Image
+              style={styles.image}
+              source={require("../assets/images/room_elements/fish_bowl.png")}
+            ></Image>
+            <Image
+              style={styles.image}
+              source={require("../assets/images/room_elements/bookshelf.png")}
+            ></Image> */}
+          </GameLoop>
         </ImageBackground>
       </ScrollView>
     </View>
@@ -72,8 +82,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: "press-start",
   },
-  bg: {
+  image: {
     height: Screen.height * 0.95,
-    width: Screen.height * 0.95 * 1.125,
+    width: Screen.height * 1.125 * 0.95,
   },
 });
