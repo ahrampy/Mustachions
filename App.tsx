@@ -68,18 +68,18 @@ function OptionsScreen({ navigation }: any) {
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
-  const [mustachionsLoaded, setMustachions] = useState(null);
+  const [mustachions, setMustachions] = useState(null);
 
   React.useEffect(() => {
     db.transaction(tx => {
       tx.executeSql(
         `select * from mustachions`, [],
-        (_, { rows: { _array } }) => setMustachions(_array)
+        (_, { rows: { _array } }: any) => setMustachions(_array)
       );
     });
   }, []);
 
-  if (!fontLoaded || !mustachionsLoaded) {
+  if (!fontLoaded || !mustachions) {
     return (
       <AppLoading
         startAsync={fetchFonts}
