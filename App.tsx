@@ -1,18 +1,22 @@
+//* react *//
 import React, { useState } from "react";
 import { StyleSheet, View, Pressable, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+//* components *//
 import Screen from "./constants/screen";
 import Menu from "./components/menu";
 import Store from "./components/store";
 import Options from "./components/options";
 import Game from "./components/game";
 import Island from "./components/island";
-import * as Font from "expo-font";
+//* expo *//
 import { AppLoading } from "expo";
-// import * as SQLite from 'expo-sqlite';
+import * as Font from "expo-font";
+//* sqlite *//
+import * as SQLite from "expo-sqlite";
 
-// const db = SQLite.openDatabase("mustachions");
+const db = SQLite.openDatabase("db.mustachions");
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -63,13 +67,23 @@ function OptionsScreen({ navigation }: any) {
 }
 
 export default function App() {
-  const [dataLoaded, setDataLoaded] = useState(false);
+  const [fontLoaded, setFontLoaded] = useState(false);
+  const [mustachionsLoaded, setMustachions] = useState(null);
 
-  if (!dataLoaded) {
+  React.useEffect(() => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `select * from mustachions`, [],
+        (_, { rows: { _array } }) => setMustachions(_array)
+      );
+    });
+  }, []);
+
+  if (!fontLoaded || !mustachionsLoaded) {
     return (
       <AppLoading
         startAsync={fetchFonts}
-        onFinish={() => setDataLoaded(true)}
+        onFinish={() => setFontLoaded(true)}
       />
     );
   }
