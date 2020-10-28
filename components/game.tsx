@@ -20,11 +20,11 @@ export default () => {
   function update({ touches, screen, layout, time }: any) {
     let press = touches.find((x: any) => x.type === "press");
     if (press) {
-      // console.log(press); // !
-      // console.log(time); // !
+      // console.log(press);
+      // console.log(time);
     }
   }
-  const [introVisible, setIntroVisible] = useState(true); // !! testing
+  const [introVisible, setIntroVisible] = useState(true);
 
   useEffect(() => {
     let closeIntro = setTimeout(() => {

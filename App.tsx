@@ -1,6 +1,6 @@
 //* react *//
-import React, { useState } from "react";
-import { StyleSheet, View, Pressable, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { AsyncStorage, StyleSheet, View, Pressable, Image, Text, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 //* components *//
@@ -13,18 +13,20 @@ import Island from "./components/island";
 //* expo *//
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
-//* sqlite *//
-import * as SQLite from "expo-sqlite";
+// import * as AppAuth from "expo-app-auth";
+// import * as SQLite from "expo-sqlite";
 
-const db = SQLite.openDatabase("db.mustachions");
+// const db = SQLite.openDatabase("mustachions.db");
 
-const fetchFonts = () => {
+const fetchFont = () => {
   return Font.loadAsync({
     "press-start": require("./assets/fonts/PressStart2P-Regular.ttf"),
   });
 };
 
 const Stack = createStackNavigator();
+
+// TODO move Screen wrappers to components
 
 function MenuScreen({ navigation }: any) {
   return (
@@ -68,23 +70,12 @@ function OptionsScreen({ navigation }: any) {
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
-  const [mustachions, setMustachions] = useState(null);
+  // const [authState, setAuthState] = useState(null);
+  // const [player, setPlayer] = useState<any>(null);
 
-  React.useEffect(() => {
-    db.transaction(tx => {
-      tx.executeSql(
-        `select * from mustachions`, [],
-        (_, { rows: { _array } }: any) => setMustachions(_array)
-      );
-    });
-  }, []);
-
-  if (!fontLoaded || !mustachions) {
+  if (!fontLoaded) {
     return (
-      <AppLoading
-        startAsync={fetchFonts}
-        onFinish={() => setFontLoaded(true)}
-      />
+      <AppLoading startAsync={fetchFont} onFinish={() => setFontLoaded(true)} />
     );
   }
 
@@ -118,10 +109,7 @@ export default function App() {
               backgroundColor: "#C0BC95",
             },
             headerRight: () => (
-              <Pressable
-                onPress={() => navigation.navigate("Options")}
-                // color="#333"
-              >
+              <Pressable onPress={() => navigation.navigate("Options")}>
                 <Image
                   source={require("./assets/images/settings.png")}
                   style={styles.settings}

@@ -1,11 +1,14 @@
 import React from "react";
-import { Pressable, Image, Text, StyleSheet, View } from "react-native";
+import { Pressable, Image, Text, StyleSheet, View, Modal } from "react-native";
 import Screen from "../constants/screen";
 
 export default (props: any) => {
-  // TODO hide island until needed
+  // TODO hide island until needed, hide store until unlocked
   return (
     <View style={[styles.center, styles.container]}>
+      {/* <Modal visible={!props.isSignedIn}>
+        // TODO pass down auth prop as isSignedIn
+      </Modal> */}
       <View style={[styles.center, styles.menu]}>
         <Pressable
           style={[styles.center, styles.button]}
