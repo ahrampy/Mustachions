@@ -1,6 +1,14 @@
 //* react *//
 import React, { useState, useEffect } from "react";
-import { AsyncStorage, StyleSheet, View, Pressable, Image, Text, Button } from "react-native";
+import {
+  AsyncStorage,
+  StyleSheet,
+  View,
+  Pressable,
+  Image,
+  Text,
+  Button,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 //* components *//
@@ -84,9 +92,10 @@ export default function App() {
       <Stack.Navigator
         initialRouteName="Mustachions"
         screenOptions={{
+          headerStyle: styles.defaultHeader,
           headerTitleStyle: {
-            fontFamily: "press-start",
-          },
+            fontFamily: "press-start"
+          }
         }}
       >
         <Stack.Screen name="Mustachions" component={MenuScreen} />
@@ -96,18 +105,15 @@ export default function App() {
           name="Island"
           component={IslandScreen}
           options={() => ({
-            headerStyle: {
-              backgroundColor: "#C0BC95",
-            },
+            headerStyle: [styles.defaultHeader, styles.islandHeader],
           })}
         />
         <Stack.Screen
           name="Game"
           component={GameScreen}
           options={({ navigation }) => ({
-            headerStyle: {
-              backgroundColor: "#C0BC95",
-            },
+            headerStyle: [styles.defaultHeader, styles.gameHeader],
+            gestureEnabled: false,
             headerRight: () => (
               <Pressable onPress={() => navigation.navigate("Options")}>
                 <Image
@@ -132,6 +138,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  defaultHeader: {
+    elevation: 0,
+    shadowOpacity: 0,
+    borderBottomWidth: 0,
+  },
+  gameHeader: {
+    backgroundColor: "#101626",
+  },
+  islandHeader: {
+    backgroundColor: "#C0BC95",
   },
   settings: {
     width: 25,

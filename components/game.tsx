@@ -24,7 +24,7 @@ export default () => {
       // console.log(time);
     }
   }
-  const [introVisible, setIntroVisible] = useState(true);
+  const [introVisible, setIntroVisible] = useState(false);
 
   useEffect(() => {
     let closeIntro = setTimeout(() => {
@@ -46,18 +46,18 @@ export default () => {
       <ScrollView horizontal={true} bounces={false}>
         <ImageBackground
           style={styles.image}
-          source={require("../assets/images/temp/bg.jpg")}
-          // source={require("../assets/images/room.jpg")}
+          // source={require("../assets/images/temp/bg.jpg")}
+          source={require("../assets/images/room.jpg")}
         >
           <GameLoop onUpdate={update}>
-            {/* <Image
+            <Image
               style={styles.image}
               source={require("../assets/images/room_elements/fish_bowl.png")}
             ></Image>
             <Image
               style={styles.image}
               source={require("../assets/images/room_elements/bookshelf.png")}
-            ></Image> */}
+            ></Image>
           </GameLoop>
         </ImageBackground>
       </ScrollView>
