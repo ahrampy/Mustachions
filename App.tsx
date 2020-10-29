@@ -90,15 +90,22 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Mustachions"
+        initialRouteName="Menu"
         screenOptions={{
           headerStyle: styles.defaultHeader,
           headerTitleStyle: {
-            fontFamily: "press-start"
-          }
+            fontFamily: "press-start",
+          },
         }}
       >
-        <Stack.Screen name="Mustachions" component={MenuScreen} />
+        <Stack.Screen
+          name="Menu"
+          component={MenuScreen}
+          options={{
+            headerStyle: [styles.defaultHeader, styles.menuHeader],
+            headerTitle: "Mustachions",
+          }}
+        />
         <Stack.Screen name="Store" component={StoreScreen} />
         <Stack.Screen name="Options" component={OptionsScreen} />
         <Stack.Screen
@@ -143,6 +150,9 @@ const styles = StyleSheet.create({
     elevation: 0,
     shadowOpacity: 0,
     borderBottomWidth: 0,
+  },
+  menuHeader: {
+    height: Screen.height * 0.2,
   },
   gameHeader: {
     backgroundColor: "#101626",

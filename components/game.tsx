@@ -50,24 +50,57 @@ export default () => {
       </Modal>
       <ScrollView horizontal={true} bounces={false}>
         <ImageBackground
-          style={styles.image}
+          style={styles.backgroundImage}
           // source={require("../assets/images/temp/bg.jpg")}
           source={require("../assets/images/room.jpg")}
         >
           <GameLoop onUpdate={update}>
             <ImageBackground
-              style={styles.image}
+              style={styles.backgroundImage}
               source={daytime ? window.day : window.night}
             >
               <ImageBackground
-                style={styles.image}
+                style={styles.backgroundImage}
                 source={require("../assets/images/room_elements/bookshelf.png")}
-              ></ImageBackground>
+              >
+                <Pressable style={styles.books} onPress={() => {alert("books")}}>
+                  <Image
+                    style={styles.smallImage}
+                    source={require("../assets/images/room_elements/books.png")}
+                  ></Image>
+                </Pressable>
+                <Pressable style={styles.mirror} onPress={() => {alert("mirror")}}>
+                  <Image
+                    style={styles.largeImage}
+                    source={require("../assets/images/room_elements/mirror.png")}
+                  ></Image>
+                </Pressable>
+                <Pressable style={styles.piano} onPress={() => {alert("piano")}}>
+                  <Image
+                    style={styles.longImage}
+                    source={require("../assets/images/room_elements/piano.png")}
+                  ></Image>
+                </Pressable>
+                <Pressable style={styles.speaker} onPress={() => {alert("speaker")}}>
+                  <Image
+                    style={styles.tallImage}
+                    source={require("../assets/images/room_elements/speaker.png")}
+                  ></Image>
+                </Pressable>
+                <Pressable style={styles.fishbowl} onPress={() => {alert("fishbowl")}}>
+                  <Image
+                    style={styles.mediumImage}
+                    source={require("../assets/images/room_elements/fish_bowl.png")}
+                  ></Image>
+                </Pressable>
+                <Pressable style={styles.plant} onPress={() => {alert("plant")}}>
+                  <Image
+                    style={styles.tinyImage}
+                    source={require("../assets/images/room_elements/plant.png")}
+                  ></Image>
+                </Pressable>
+              </ImageBackground>
               {/* <Image
-                style={styles.image}
-                source={require("../assets/images/room_elements/fish_bowl.png")}
-              ></Image>
-              <Image
                 style={styles.image}
                 source={require("../assets/images/room_elements/plant.png")}
               ></Image> */}
@@ -96,8 +129,62 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: "press-start",
   },
-  image: {
+  backgroundImage: {
     height: Screen.height * 0.95,
     width: Screen.height * 1.125 * 0.95,
+  },
+  largeImage: {
+    height: (Screen.height * 0.95) / 6,
+    width: (Screen.height * 1.125 * 0.95) / 7,
+  },
+  mediumImage: {
+    height: (Screen.height * 0.95) / 8,
+    width: (Screen.height * 1.125 * 0.95) / 8,
+  },
+  smallImage: {
+    height: (Screen.height * 0.95) / 10.8,
+    width: (Screen.height * 1.125 * 0.95) / 10.8,
+  },
+  tinyImage: {
+    height: (Screen.height * 0.95) / 12,
+    width: (Screen.height * 1.125 * 0.95) / 12,
+  },
+  longImage: {
+    height: (Screen.height * 0.95) / 8.5,
+    width: (Screen.height * 1.125 * 0.95) / 4.5,
+  },
+  tallImage: {
+    height: (Screen.height * 0.95) / 9,
+    width: (Screen.height * 1.125 * 0.95) / 16,
+  },
+  books: {
+    position: "absolute",
+    top: Screen.height * 0.95 - (Screen.height * 0.95) / 1.44,
+    left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 1.03,
+  },
+  mirror: {
+    position: "absolute",
+    top: Screen.height * 0.95 - (Screen.height * 0.95) / 1.35,
+    left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 1.4,
+  },
+  piano: {
+    position: "absolute",
+    top: Screen.height * 0.95 - (Screen.height * 0.95) / 2.2,
+    left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 1.45,
+  },
+  speaker: {
+    position: "absolute",
+    top: Screen.height * 0.95 - (Screen.height * 0.95) / 2.28,
+    left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 2.15,
+  },
+  fishbowl: {
+    position: "absolute",
+    top: Screen.height * 0.95 - (Screen.height * 0.95) / 2.2,
+    left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 7,
+  },
+  plant: {
+    position: "absolute",
+    top: Screen.height * 0.95 - (Screen.height * 0.95) / 1.5,
+    left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 3.4,
   },
 });
