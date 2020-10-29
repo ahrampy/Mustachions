@@ -24,7 +24,12 @@ export default () => {
       // console.log(time);
     }
   }
-  const [introVisible, setIntroVisible] = useState(false);
+  const [introVisible, setIntroVisible] = useState(false); // hatched?
+  const [daytime, setTime] = useState(true); // get local time?
+  const window = {
+    day: require("../assets/images/room_elements/sunny_day_window.png"),
+    night: require("../assets/images/room_elements/starry_night_window.png"),
+  };
 
   useEffect(() => {
     let closeIntro = setTimeout(() => {
@@ -50,14 +55,23 @@ export default () => {
           source={require("../assets/images/room.jpg")}
         >
           <GameLoop onUpdate={update}>
-            <Image
+            <ImageBackground
               style={styles.image}
-              source={require("../assets/images/room_elements/fish_bowl.png")}
-            ></Image>
-            <Image
-              style={styles.image}
-              source={require("../assets/images/room_elements/bookshelf.png")}
-            ></Image>
+              source={daytime ? window.day : window.night}
+            >
+              <ImageBackground
+                style={styles.image}
+                source={require("../assets/images/room_elements/bookshelf.png")}
+              ></ImageBackground>
+              {/* <Image
+                style={styles.image}
+                source={require("../assets/images/room_elements/fish_bowl.png")}
+              ></Image>
+              <Image
+                style={styles.image}
+                source={require("../assets/images/room_elements/plant.png")}
+              ></Image> */}
+            </ImageBackground>
           </GameLoop>
         </ImageBackground>
       </ScrollView>
