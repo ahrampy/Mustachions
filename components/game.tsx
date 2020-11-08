@@ -26,10 +26,16 @@ export default () => {
   }
   const [introVisible, setIntroVisible] = useState(false); // needs to hatch
   const [daytime, setTime] = useState(true); // get local time?
+  const [mustachionType, setType] = useState(0);
   const window = {
     day: require("../assets/images/room_elements/sunny_day_window.png"),
     night: require("../assets/images/room_elements/starry_night_window.png"),
   };
+  const mustachions = [
+    require("../assets/images/mustachions/mustachion_1.psd"),
+    require("../assets/images/mustachions/mustachion_2.psd"),
+    require("../assets/images/mustachions/mustachion_3.psd"),
+  ];
 
   useEffect(() => {
     let closeIntro = setTimeout(() => {
@@ -95,8 +101,14 @@ export default () => {
                 </Pressable>
                 <Pressable style={styles.plant} onPress={() => {alert("plant")}}>
                   <Image
-                    style={styles.tinyImage}
+                    style={styles.smallImage}
                     source={require("../assets/images/room_elements/plant.png")}
+                  ></Image>
+                </Pressable>
+                <Pressable style={styles.mustachion} onPress={() => {setType((mustachionType + 1) % 3)}}>
+                  <Image
+                    style={styles.largeImage}
+                    source={mustachions[mustachionType]}
                   ></Image>
                 </Pressable>
               </ImageBackground>
@@ -130,7 +142,7 @@ const styles = StyleSheet.create({
     width: Screen.height * 1.125 * 0.95,
   },
   largeImage: {
-    height: (Screen.height * 0.95) / 6,
+    height: (Screen.height * 0.95) / 7,
     width: (Screen.height * 1.125 * 0.95) / 7,
   },
   mediumImage: {
@@ -138,10 +150,6 @@ const styles = StyleSheet.create({
     width: (Screen.height * 1.125 * 0.95) / 8,
   },
   smallImage: {
-    height: (Screen.height * 0.95) / 12,
-    width: (Screen.height * 1.125 * 0.95) / 12,
-  },
-  tinyImage: {
     height: (Screen.height * 0.95) / 12,
     width: (Screen.height * 1.125 * 0.95) / 12,
   },
@@ -153,6 +161,11 @@ const styles = StyleSheet.create({
     height: (Screen.height * 0.95) / 9,
     width: (Screen.height * 1.125 * 0.95) / 16,
   },
+  mustachion: {
+    position: "absolute",
+    top: Screen.height * 0.95 - (Screen.height * 0.95) / 3,
+    left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 4.5,
+  },
   books: {
     position: "absolute",
     top: Screen.height * 0.95 - (Screen.height * 0.95) / 1.45,
@@ -160,7 +173,7 @@ const styles = StyleSheet.create({
   },
   mirror: {
     position: "absolute",
-    top: Screen.height * 0.95 - (Screen.height * 0.95) / 1.35,
+    top: Screen.height * 0.95 - (Screen.height * 0.95) / 1.5,
     left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 1.4,
   },
   piano: {
