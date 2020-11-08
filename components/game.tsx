@@ -24,7 +24,7 @@ export default () => {
       // console.log(time);
     }
   }
-  const [introVisible, setIntroVisible] = useState(false); // hatched?
+  const [introVisible, setIntroVisible] = useState(false); // needs to hatch
   const [daytime, setTime] = useState(true); // get local time?
   const window = {
     day: require("../assets/images/room_elements/sunny_day_window.png"),
@@ -100,10 +100,6 @@ export default () => {
                   ></Image>
                 </Pressable>
               </ImageBackground>
-              {/* <Image
-                style={styles.image}
-                source={require("../assets/images/room_elements/plant.png")}
-              ></Image> */}
             </ImageBackground>
           </GameLoop>
         </ImageBackground>
@@ -142,8 +138,8 @@ const styles = StyleSheet.create({
     width: (Screen.height * 1.125 * 0.95) / 8,
   },
   smallImage: {
-    height: (Screen.height * 0.95) / 10.8,
-    width: (Screen.height * 1.125 * 0.95) / 10.8,
+    height: (Screen.height * 0.95) / 12,
+    width: (Screen.height * 1.125 * 0.95) / 12,
   },
   tinyImage: {
     height: (Screen.height * 0.95) / 12,
@@ -159,8 +155,8 @@ const styles = StyleSheet.create({
   },
   books: {
     position: "absolute",
-    top: Screen.height * 0.95 - (Screen.height * 0.95) / 1.44,
-    left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 1.03,
+    top: Screen.height * 0.95 - (Screen.height * 0.95) / 1.45,
+    left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 1.035,
   },
   mirror: {
     position: "absolute",
