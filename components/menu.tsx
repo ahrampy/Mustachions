@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, Image, Text, StyleSheet, View, Modal } from "react-native";
+import { Pressable, Text, StyleSheet, View } from "react-native";
 import Screen from "../constants/screen";
 
 export default (props: any) => {

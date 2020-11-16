@@ -10,6 +10,8 @@ import {
 } from "react-native";
 import Screen from "../constants/screen";
 import { GameLoop } from "react-native-game-engine";
+import { Audio } from "expo-av";
+// import { Sounds, Images } from "/assets";
 
 // * DOCS
 //  * SCROLLVIEW: https://reactnative.dev/docs/scrollview
@@ -24,17 +26,20 @@ export default () => {
       // console.log(time);
     }
   }
-  const [introVisible, setIntroVisible] = useState(false); // needs to hatch
+  const [introVisible, setIntroVisible] = useState(true); // needs to hatch
   const [daytime, setTime] = useState(true); // get local time?
   const [mustachionType, setType] = useState(0);
+  const sounds = {
+    // grey_day: new Audio("../assets/sounds/grey_day.wav"),
+  };
   const window = {
     day: require("../assets/images/room_elements/sunny_day_window.png"),
     night: require("../assets/images/room_elements/starry_night_window.png"),
   };
   const mustachions = [
-    require("../assets/images/mustachions/mustachion_1.psd"),
-    require("../assets/images/mustachions/mustachion_2.psd"),
-    require("../assets/images/mustachions/mustachion_3.psd"),
+    require("../assets/images/mustachions/mustachion_1.png"),
+    require("../assets/images/mustachions/mustachion_2.png"),
+    require("../assets/images/mustachions/mustachion_3.png"),
   ];
 
   useEffect(() => {
@@ -45,6 +50,10 @@ export default () => {
       clearTimeout(closeIntro);
     };
   }, [introVisible]);
+
+  useEffect(() => {
+    // sounds.grey_day.play();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -69,43 +78,78 @@ export default () => {
                 style={styles.backgroundImage}
                 source={require("../assets/images/room_elements/bookshelf.png")}
               >
-                <Pressable style={styles.books} onPress={() => {alert("books")}}>
+                <Pressable
+                  style={styles.books}
+                  onPress={() => {
+                    alert("books");
+                  }}
+                >
                   <Image
                     style={styles.smallImage}
                     source={require("../assets/images/room_elements/books.png")}
                   ></Image>
                 </Pressable>
-                <Pressable style={styles.mirror} onPress={() => {alert("mirror")}}>
+                <Pressable
+                  style={styles.mirror}
+                  onPress={() => {
+                    alert("mirror");
+                  }}
+                >
                   <Image
                     style={styles.largeImage}
                     source={require("../assets/images/room_elements/mirror.png")}
                   ></Image>
                 </Pressable>
-                <Pressable style={styles.piano} onPress={() => {alert("piano")}}>
+                <Pressable
+                  style={styles.piano}
+                  onPress={() => {
+                    alert("piano");
+                  }}
+                >
                   <Image
                     style={styles.longImage}
                     source={require("../assets/images/room_elements/piano.png")}
                   ></Image>
                 </Pressable>
-                <Pressable style={styles.speaker} onPress={() => {alert("speaker")}}>
+                <Pressable
+                  style={styles.speaker}
+                  onPress={() => {
+                    alert("speaker");
+                  }}
+                >
                   <Image
                     style={styles.tallImage}
                     source={require("../assets/images/room_elements/speaker.png")}
                   ></Image>
                 </Pressable>
-                <Pressable style={styles.fishbowl} onPress={() => {alert("fishbowl")}}>
+                <Pressable
+                  style={styles.fishbowl}
+                  onPress={() => {
+                    alert("fishbowl");
+                  }}
+                >
                   <Image
                     style={styles.mediumImage}
                     source={require("../assets/images/room_elements/fish_bowl.png")}
                   ></Image>
                 </Pressable>
-                <Pressable style={styles.plant} onPress={() => {alert("plant")}}>
+                <Pressable
+                  style={styles.plant}
+                  onPress={() => {
+                    alert("plant");
+                  }}
+                >
                   <Image
                     style={styles.smallImage}
                     source={require("../assets/images/room_elements/plant.png")}
                   ></Image>
                 </Pressable>
-                <Pressable style={styles.mustachion} onPress={() => {setType((mustachionType + 1) % 3)}}>
+                <Pressable
+                  style={styles.mustachion}
+                  onPress={() => {
+                    setType((mustachionType + 1) % 3);
+                  }}
+                >
                   <Image
                     style={styles.largeImage}
                     source={mustachions[mustachionType]}
@@ -163,7 +207,7 @@ const styles = StyleSheet.create({
   },
   mustachion: {
     position: "absolute",
-    top: Screen.height * 0.95 - (Screen.height * 0.95) / 3,
+    top: Screen.height * 0.95 - (Screen.height * 0.95) / 3.4,
     left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 4.5,
   },
   books: {
