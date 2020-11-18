@@ -66,7 +66,6 @@ export default () => {
       <ScrollView horizontal={true} bounces={false}>
         <ImageBackground
           style={styles.backgroundImage}
-          // source={require("../assets/images/temp/bg.jpg")}
           source={require("../assets/images/room.jpg")}
         >
           <GameLoop onUpdate={update}>

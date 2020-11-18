@@ -7,7 +7,6 @@ import {
   Pressable,
   Image,
   Text,
-  Button,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -21,10 +20,6 @@ import Island from "./components/island";
 //* expo *//
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
-// import * as AppAuth from "expo-app-auth";
-// import * as SQLite from "expo-sqlite";
-
-// const db = SQLite.openDatabase("mustachions.db");
 
 const fetchFont = () => {
   return Font.loadAsync({
