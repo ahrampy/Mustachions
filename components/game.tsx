@@ -11,7 +11,7 @@ import {
 import Screen from "../constants/screen";
 import { GameLoop } from "react-native-game-engine";
 import { Audio } from "expo-av";
-// import { Sounds, Images } from "/assets";
+// import { Sounds, Images } from "./assets"; // TODO move final assets
 
 // * DOCS
 //  * SCROLLVIEW: https://reactnative.dev/docs/scrollview
@@ -26,7 +26,7 @@ export default () => {
       // console.log(time);
     }
   }
-  const [introVisible, setIntroVisible] = useState(true); // needs to hatch
+  const [introVisible, setIntroVisible] = useState(false); // needs to hatch
   const [daytime, setTime] = useState(true); // get local time?
   const [mustachionType, setType] = useState(0);
   const sounds = {
@@ -78,8 +78,8 @@ export default () => {
                 source={require("../assets/images/room_elements/bookshelf.png")}
               >
                 <Pressable
-                  style={styles.books}
-                  onPress={() => {
+                  style={[styles.pressable, styles.books]}
+                  onPressOut={() => {
                     alert("books");
                   }}
                 >
@@ -89,8 +89,8 @@ export default () => {
                   ></Image>
                 </Pressable>
                 <Pressable
-                  style={styles.mirror}
-                  onPress={() => {
+                  style={[styles.pressable, styles.mirror]}
+                  onPressOut={() => {
                     alert("mirror");
                   }}
                 >
@@ -100,8 +100,8 @@ export default () => {
                   ></Image>
                 </Pressable>
                 <Pressable
-                  style={styles.piano}
-                  onPress={() => {
+                  style={[styles.pressable, styles.piano]}
+                  onPressOut={() => {
                     alert("piano");
                   }}
                 >
@@ -111,8 +111,8 @@ export default () => {
                   ></Image>
                 </Pressable>
                 <Pressable
-                  style={styles.speaker}
-                  onPress={() => {
+                  style={[styles.pressable, styles.speaker]}
+                  onPressOut={() => {
                     alert("speaker");
                   }}
                 >
@@ -122,8 +122,8 @@ export default () => {
                   ></Image>
                 </Pressable>
                 <Pressable
-                  style={styles.fishbowl}
-                  onPress={() => {
+                  style={[styles.pressable, styles.fishbowl]}
+                  onPressOut={() => {
                     alert("fishbowl");
                   }}
                 >
@@ -133,8 +133,8 @@ export default () => {
                   ></Image>
                 </Pressable>
                 <Pressable
-                  style={styles.plant}
-                  onPress={() => {
+                  style={[styles.pressable, styles.plant]}
+                  onPressOut={() => {
                     alert("plant");
                   }}
                 >
@@ -144,8 +144,8 @@ export default () => {
                   ></Image>
                 </Pressable>
                 <Pressable
-                  style={styles.mustachion}
-                  onPress={() => {
+                  style={[styles.pressable, styles.mustachion]}
+                  onPressOut={() => {
                     setType((mustachionType + 1) % 3);
                   }}
                 >
@@ -179,6 +179,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontFamily: "press-start",
+  },
+  pressable: {
+    // backgroundColor: "rgba(255,250,250,.8)",
+    // borderRadius: 10
   },
   backgroundImage: {
     height: Screen.height * 0.95,
