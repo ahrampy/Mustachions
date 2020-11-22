@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable, Image, Text, StyleSheet, View } from "react-native";
-import Screen from "../constants/screen";
+import SCREEN from "../constants/screen";
 
 export default () => {
   return (
@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   container: {
-    width: Screen.width,
-    height: Screen.height,
+    width: SCREEN.width,
+    height: SCREEN.height,
     backgroundColor: "#C0BC95",
   },
   text: {
@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
     fontFamily: "press-start",
   },
   gif: {
-    height: Screen.height * 0.5,
+    height: SCREEN.height * 0.5,
   },
 });

@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable, Text, StyleSheet, View } from "react-native";
-import Screen from "../constants/screen";
+import SCREEN from "../constants/screen";
 
 export default (props: any) => {
   // TODO hide island until needed, hide store until unlocked
@@ -46,13 +46,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   container: {
-    width: Screen.width,
-    height: Screen.height,
+    width: SCREEN.width,
+    height: SCREEN.height,
     backgroundColor: "white",
   },
   menu: {
-    width: Screen.width * 0.6,
-    height: Screen.height * 0.8,
+    width: SCREEN.width * 0.6,
+    height: SCREEN.height * 0.8,
     // backgroundColor: "rgba(150, 150, 150, .8)",
     borderRadius: 5,
   },

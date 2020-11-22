@@ -1,17 +1,11 @@
 //* react *//
 import React, { useState, useEffect } from "react";
-import {
-  AsyncStorage,
-  StyleSheet,
-  View,
-  Pressable,
-  Image,
-  Text,
-} from "react-native";
+import { StyleSheet, View, Pressable, Image, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 //* components *//
-import Screen from "./constants/screen";
+import SCREEN from "./constants/screen";
+import STORE from "./constants/globalState";
 import Menu from "./components/menu";
 import Store from "./components/store";
 import Options from "./components/options";
@@ -21,17 +15,12 @@ import Island from "./components/island";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
 
-const fetchFont = () => {
-  return Font.loadAsync({
-    "press-start": require("./assets/fonts/PressStart2P-Regular.ttf"),
-  });
-};
-
 const Stack = createStackNavigator();
 
+// TODO change stack navigator
 // TODO move Screen wrappers to components
 
-function MenuScreen({ navigation }: any) {
+function MenuScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Menu navigation={navigation}></Menu>
@@ -55,7 +44,7 @@ function IslandScreen() {
   );
 }
 
-function StoreScreen({ navigation }: any) {
+function StoreScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Store navigation={navigation}></Store>
@@ -63,7 +52,7 @@ function StoreScreen({ navigation }: any) {
   );
 }
 
-function OptionsScreen({ navigation }: any) {
+function OptionsScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Options navigation={navigation}></Options>
@@ -72,16 +61,44 @@ function OptionsScreen({ navigation }: any) {
 }
 
 export default function App() {
-  const [fontLoaded, setFontLoaded] = useState(false);
+  // const [fontLoaded, setFontLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  // const [gameData, setGameData] = useState(null);
   // const [authState, setAuthState] = useState(null);
   // const [player, setPlayer] = useState<any>(null);
 
-  if (!fontLoaded) {
+  const fetchFont = () => {
+    return Font.loadAsync({
+      "press-start": require("./assets/fonts/PressStart2P-Regular.ttf"),
+    });
+  };
+
+  // const setInitialState = async () => {
+  //   try {
+  //     STORE.initialized = true;
+  //     const jsonValue = JSON.stringify(STORE);
+  //     await AsyncStorage.setItem("@game_Data", jsonValue);
+  //   } catch (e) {
+  //     console.log("error saving: " + e);
+  //   }
+  // };
+
+  const fetchData = () => {
+    return STORE.UPDATE.get();
+  };
+
+  const fetchAll = async () => {
+    await Promise.all([fetchFont(), fetchData()]).then((res) => {
+      return res;
+    });
+  };
+
+  if (!loaded) {
     return (
-      <AppLoading startAsync={fetchFont} onFinish={() => setFontLoaded(true)} />
+      <AppLoading startAsync={fetchAll} onFinish={() => setLoaded(true)} />
     );
   }
-
+  
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -147,7 +164,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
   },
   menuHeader: {
-    height: Screen.height * 0.2,
+    height: SCREEN.height * 0.2,
   },
   gameHeader: {
     backgroundColor: "#101626",
@@ -158,6 +175,6 @@ const styles = StyleSheet.create({
   settings: {
     width: 25,
     height: 25,
-    right: Screen.width * 0.02,
+    right: SCREEN.width * 0.02,
   },
 });

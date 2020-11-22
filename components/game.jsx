@@ -8,7 +8,8 @@ import {
   Pressable,
   Modal,
 } from "react-native";
-import Screen from "../constants/screen";
+import SCREEN from "../constants/screen";
+import STORE from "../constants/globalState";
 import { GameLoop } from "react-native-game-engine";
 import { Audio } from "expo-av";
 // import { Sounds, Images } from "./assets"; // TODO move final assets
@@ -19,16 +20,26 @@ import { Audio } from "expo-av";
 // *
 
 export default () => {
-  function update({ touches, screen, layout, time }: any) {
-    let press = touches.find((x: any) => x.type === "press");
+  const [introVisible, setIntroVisible] = useState(false); // needs to hatch
+  const [daytime, setTime] = useState(true); // keep track of time
+  const [mustachionType, setType] = useState(0);
+  const [animClock, tick] = useState(null);
+  const init = () => {};
+  const update = ({ touches, SCREEN, layout, time }) => {
+    let press = touches.find((x) => x.type === "press");
     if (press) {
       // console.log(press);
-      // console.log(time);
     }
-  }
-  const [introVisible, setIntroVisible] = useState(false); // needs to hatch
-  const [daytime, setTime] = useState(true); // get local time?
-  const [mustachionType, setType] = useState(0);
+    animate(time);
+  };
+  const animate = (time) => {
+    if (!animClock) tick(time.current);
+    else if (time.current - animClock > 150) {
+      // console.log("tick:" + time.current);
+      STORE.UPDATE.get();
+      tick(time.current);
+    }
+  };
   const sounds = {
     // grey_day: new Audio("../assets/sounds/grey_day.wav"),
   };
@@ -43,6 +54,10 @@ export default () => {
   ];
 
   useEffect(() => {
+    init();
+  }, []);
+
+  useEffect(() => {
     let closeIntro = setTimeout(() => {
       setIntroVisible(false);
     }, 9000);
@@ -50,10 +65,6 @@ export default () => {
       clearTimeout(closeIntro);
     };
   }, [introVisible]);
-
-  useEffect(() => {
-    // sounds.grey_day.play();
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -80,7 +91,7 @@ export default () => {
                 <Pressable
                   style={[styles.pressable, styles.books]}
                   onPressOut={() => {
-                    alert("books");
+                    // alert("books");
                   }}
                 >
                   <Image
@@ -91,18 +102,18 @@ export default () => {
                 <Pressable
                   style={[styles.pressable, styles.mirror]}
                   onPressOut={() => {
-                    alert("mirror");
+                    // alert("mirror");
                   }}
                 >
                   <Image
-                    style={styles.largeImage}
+                    style={styles.mediumImage}
                     source={require("../assets/images/room_elements/mirror.png")}
                   ></Image>
                 </Pressable>
                 <Pressable
                   style={[styles.pressable, styles.piano]}
                   onPressOut={() => {
-                    alert("piano");
+                    // alert("piano");
                   }}
                 >
                   <Image
@@ -113,7 +124,7 @@ export default () => {
                 <Pressable
                   style={[styles.pressable, styles.speaker]}
                   onPressOut={() => {
-                    alert("speaker");
+                    // alert("speaker");
                   }}
                 >
                   <Image
@@ -124,7 +135,7 @@ export default () => {
                 <Pressable
                   style={[styles.pressable, styles.fishbowl]}
                   onPressOut={() => {
-                    alert("fishbowl");
+                    // alert("fishbowl");
                   }}
                 >
                   <Image
@@ -135,7 +146,7 @@ export default () => {
                 <Pressable
                   style={[styles.pressable, styles.plant]}
                   onPressOut={() => {
-                    alert("plant");
+                    // alert("plant");
                   }}
                 >
                   <Image
@@ -166,11 +177,11 @@ export default () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: Screen.height,
+    height: SCREEN.height,
   },
   intro: {
-    height: Screen.height,
-    width: Screen.width,
+    height: SCREEN.height,
+    width: SCREEN.width,
   },
   gif: {
     width: "100%",
@@ -185,62 +196,62 @@ const styles = StyleSheet.create({
     // borderRadius: 10
   },
   backgroundImage: {
-    height: Screen.height * 0.95,
-    width: Screen.height * 1.125 * 0.95,
+    height: SCREEN.height * 0.95,
+    width: SCREEN.height * 1.125 * 0.95,
   },
   largeImage: {
-    height: (Screen.height * 0.95) / 7,
-    width: (Screen.height * 1.125 * 0.95) / 7,
+    height: (SCREEN.height * 0.95) / 6,
+    width: (SCREEN.height * 1.125 * 0.95) / 6,
   },
   mediumImage: {
-    height: (Screen.height * 0.95) / 8,
-    width: (Screen.height * 1.125 * 0.95) / 8,
+    height: (SCREEN.height * 0.95) / 8,
+    width: (SCREEN.height * 1.125 * 0.95) / 8,
   },
   smallImage: {
-    height: (Screen.height * 0.95) / 12,
-    width: (Screen.height * 1.125 * 0.95) / 12,
+    height: (SCREEN.height * 0.95) / 12,
+    width: (SCREEN.height * 1.125 * 0.95) / 12,
   },
   longImage: {
-    height: (Screen.height * 0.95) / 8.5,
-    width: (Screen.height * 1.125 * 0.95) / 4.5,
+    height: (SCREEN.height * 0.95) / 8.5,
+    width: (SCREEN.height * 1.125 * 0.95) / 4.5,
   },
   tallImage: {
-    height: (Screen.height * 0.95) / 9,
-    width: (Screen.height * 1.125 * 0.95) / 16,
+    height: (SCREEN.height * 0.95) / 9,
+    width: (SCREEN.height * 1.125 * 0.95) / 16,
   },
   mustachion: {
     position: "absolute",
-    top: Screen.height * 0.95 - (Screen.height * 0.95) / 3.4,
-    left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 4.5,
+    top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 3.4,
+    left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 4.5,
   },
   books: {
     position: "absolute",
-    top: Screen.height * 0.95 - (Screen.height * 0.95) / 1.45,
-    left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 1.035,
+    top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 1.45,
+    left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 1.035,
   },
   mirror: {
     position: "absolute",
-    top: Screen.height * 0.95 - (Screen.height * 0.95) / 1.5,
-    left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 1.4,
+    top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 1.5,
+    left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 1.4,
   },
   piano: {
     position: "absolute",
-    top: Screen.height * 0.95 - (Screen.height * 0.95) / 2.2,
-    left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 1.45,
+    top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 2.2,
+    left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 1.45,
   },
   speaker: {
     position: "absolute",
-    top: Screen.height * 0.95 - (Screen.height * 0.95) / 2.28,
-    left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 2.15,
+    top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 2.28,
+    left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 2.15,
   },
   fishbowl: {
     position: "absolute",
-    top: Screen.height * 0.95 - (Screen.height * 0.95) / 2.2,
-    left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 7,
+    top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 2.2,
+    left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 7,
   },
   plant: {
     position: "absolute",
-    top: Screen.height * 0.95 - (Screen.height * 0.95) / 1.5,
-    left: Screen.height * 1.125 * 0.95 - (Screen.height * 1.125 * 0.95) / 3.4,
+    top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 1.5,
+    left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 3.4,
   },
 });
