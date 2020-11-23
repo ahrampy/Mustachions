@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 //* components *//
 import SCREEN from "./constants/screen";
-import STORE from "./constants/globalState";
+import { STORE, UPDATE } from "./constants/globalState";
 import Menu from "./components/menu";
 import Store from "./components/store";
 import Options from "./components/options";
@@ -67,30 +67,15 @@ export default function App() {
   // const [authState, setAuthState] = useState(null);
   // const [player, setPlayer] = useState<any>(null);
 
-  const fetchFont = () => {
-    return Font.loadAsync({
+  const fetchFont = () =>
+    Font.loadAsync({
       "press-start": require("./assets/fonts/PressStart2P-Regular.ttf"),
     });
-  };
 
-  // const setInitialState = async () => {
-  //   try {
-  //     STORE.initialized = true;
-  //     const jsonValue = JSON.stringify(STORE);
-  //     await AsyncStorage.setItem("@game_Data", jsonValue);
-  //   } catch (e) {
-  //     console.log("error saving: " + e);
-  //   }
-  // };
-
-  const fetchData = () => {
-    return STORE.UPDATE.get();
-  };
+  const fetchData = () => UPDATE.get();
 
   const fetchAll = async () => {
-    await Promise.all([fetchFont(), fetchData()]).then((res) => {
-      return res;
-    });
+    await Promise.all([fetchFont(), fetchData()])
   };
 
   if (!loaded) {
@@ -98,7 +83,7 @@ export default function App() {
       <AppLoading startAsync={fetchAll} onFinish={() => setLoaded(true)} />
     );
   }
-  
+
   return (
     <NavigationContainer>
       <Stack.Navigator

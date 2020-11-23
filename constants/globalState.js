@@ -5,7 +5,7 @@ const UPDATE = {
     try {
       const jsonValue = await AsyncStorage.getItem("@game_Data");
       const data = jsonValue != null ? JSON.parse(jsonValue) : null;
-      if (!data) STORE.set();
+      if (!data) UPDATE.set();
       else UPDATE.map(data, STORE);
     } catch (e) {
       console.log("data fetch failed: " + e);
@@ -21,13 +21,19 @@ const UPDATE = {
   },
   map: (data, obj) => {
     for (let key in data) {
-      console.log(key);
+      if (key === "UPDATE") continue;
+      if (Array.isArray(data[key])) {
+        obj[key] = data[key].slice(0);
+      } else if (typeof data[key] === "object" && data[key] !== null) {
+        UPDATE.map(data[key], obj[key]);
+      } else {
+        obj[key] = data[key];
+      }
     }
   },
 };
 
 const STORE = {
-  UPDATE: UPDATE,
   mustachion: {
     type: 0,
     age: 0,
@@ -54,4 +60,4 @@ const STORE = {
   settings: {},
 };
 
-export default STORE;
+export { STORE, UPDATE };

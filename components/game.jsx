@@ -9,7 +9,7 @@ import {
   Modal,
 } from "react-native";
 import SCREEN from "../constants/screen";
-import STORE from "../constants/globalState";
+import { STORE, UPDATE } from "../constants/globalState";
 import { GameLoop } from "react-native-game-engine";
 import { Audio } from "expo-av";
 // import { Sounds, Images } from "./assets"; // TODO move final assets
@@ -25,7 +25,7 @@ export default () => {
   const [mustachionType, setType] = useState(0);
   const [animClock, tick] = useState(null);
   const init = () => {};
-  const update = ({ touches, SCREEN, layout, time }) => {
+  const update = ({ touches, screen, layout, time }) => {
     let press = touches.find((x) => x.type === "press");
     if (press) {
       // console.log(press);
@@ -36,7 +36,11 @@ export default () => {
     if (!animClock) tick(time.current);
     else if (time.current - animClock > 150) {
       // console.log("tick:" + time.current);
-      STORE.UPDATE.get();
+
+      // STORE.mustachion.type = (STORE.mustachion.type + 1) % 3;
+      // UPDATE.set();
+      // UPDATE.get();
+      // setType(STORE.mustachion.type);
       tick(time.current);
     }
   };
