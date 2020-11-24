@@ -3,9 +3,10 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Pressable, Image, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-//* components *//
+//* constant *//
 import SCREEN from "./constants/screen";
-import { STORE, UPDATE } from "./constants/globalState";
+import STATE from "./constants/globalState";
+//* components *//
 import Menu from "./components/menu";
 import Store from "./components/store";
 import Options from "./components/options";
@@ -17,7 +18,7 @@ import * as Font from "expo-font";
 
 const Stack = createStackNavigator();
 
-// TODO change stack navigator
+// TODO change stack navigator safe zone
 // TODO move Screen wrappers to components
 
 function MenuScreen({ navigation }) {
@@ -72,7 +73,7 @@ export default function App() {
       "press-start": require("./assets/fonts/PressStart2P-Regular.ttf"),
     });
 
-  const fetchData = () => UPDATE.get();
+  const fetchData = () => STATE.get();
 
   const fetchAll = async () => {
     await Promise.all([fetchFont(), fetchData()])

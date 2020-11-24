@@ -1,6 +1,7 @@
 import { AsyncStorage } from "react-native";
 
 const STORE = {
+  timeOfDay: 0,
   mustachion: {
     type: 0,
     age: 0,
@@ -34,16 +35,20 @@ const STATE = {
       const data = jsonValue != null ? JSON.parse(jsonValue) : null;
       if (!data) STATE.set();
       else STATE.map(data, STORE);
+      return true;
     } catch (e) {
       console.log("local storage data fetch failed ~~ " + e.message);
+      return false;
     }
   },
   set: async () => {
     try {
       const jsonValue = JSON.stringify(STORE);
       await AsyncStorage.setItem("@game_Data", jsonValue);
+      return true;
     } catch (e) {
       console.log("error saving to local storage ~~ " + e.message);
+      return false;
     }
   },
   map: (data, obj) => {
@@ -57,13 +62,25 @@ const STATE = {
       }
     }
   },
+  check: (path) => {
+    let dest = STORE;
+    while (path.length > 1) {
+      dest = dest[path.shift()];
+    }
+    if (dest[path[0]] !== undefined) {
+      return dest[path[0]];
+    } else {
+      return false;
+    }
+  },
   update: (path, value) => {
     let dest = STORE;
     while (path.length > 1) {
       dest = dest[path.shift()];
     }
-    if (dest[path[0]]) {
+    if (dest[path[0]] !== undefined) {
       dest[path[0]] = value;
+      STATE.set();
       return true;
     } else {
       return false;
@@ -73,6 +90,7 @@ const STATE = {
     const arr = STORE.items.owned[category];
     if (Array.isArray(arr)) {
       arr.push(type);
+      STATE.set();
       return true;
     } else {
       return false;

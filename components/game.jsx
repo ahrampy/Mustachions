@@ -8,10 +8,14 @@ import {
   Pressable,
   Modal,
 } from "react-native";
+//* constant *//
 import SCREEN from "../constants/screen";
-import { STORE, UPDATE } from "../constants/globalState";
+import STATE from "../constants/globalState";
+//* game engine*//
 import { GameLoop } from "react-native-game-engine";
+//* expo *//
 import { Audio } from "expo-av";
+//* assets *//
 // import { Sounds, Images } from "./assets"; // TODO move final assets
 
 // * DOCS
@@ -35,12 +39,11 @@ export default () => {
   const animate = (time) => {
     if (!animClock) tick(time.current);
     else if (time.current - animClock > 150) {
-      // console.log("tick:" + time.current);
-
-      // STORE.mustachion.type = (STORE.mustachion.type + 1) % 3;
-      // UPDATE.set();
-      // UPDATE.get();
-      // setType(STORE.mustachion.type);
+      // STATE.update(
+      //   ["mustachion", "type"],
+      //   (STATE.check(["mustachion", "type"]) + 1) % 3
+      // );
+      // setType(STATE.check(["mustachion", "type"]));
       tick(time.current);
     }
   };
