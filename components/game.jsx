@@ -11,7 +11,9 @@ import {
 //* constant *//
 import SCREEN from "../constants/screen";
 import STATE from "../constants/globalState";
-//* game engine*//
+//* sub-components *//
+import Element from "./element";
+//* game engine *//
 import { GameLoop } from "react-native-game-engine";
 //* expo *//
 import { Audio } from "expo-av";
@@ -24,7 +26,7 @@ import { Audio } from "expo-av";
 // *
 
 export default () => {
-  const [introVisible, setIntroVisible] = useState(true); // needs to hatch
+  const [introVisible, setIntroVisible] = useState(false); // needs to hatch
   const [daytime, setTime] = useState(true); // keep track of time
   const [mustachionType, setType] = useState(0);
   const [animClock, tick] = useState(null);
@@ -156,22 +158,13 @@ export default () => {
                     source={require("../assets/images/room_elements/fish_bowl.png")}
                   ></Image>
                 </Pressable>
-                <Pressable
-                  style={[styles.pressable, styles.plant]}
-                  onPressOut={() => {
-                    // alert("plant");
-                  }}
-                >
-                  <View style={[styles.sheet, styles.smallImage]}>
-                    <Image
-                      style={[
-                        styles.smallImageSprite,
-                        { marginTop: -((SCREEN.height * 0.95) / 12) * frame },
-                      ]}
-                      source={require("../assets/images/room_elements/plant_1_sheet.png")}
-                    ></Image>
-                  </View>
-                </Pressable>
+                <Element
+                  name={"plant"}
+                  sizeDiv={12}
+                  position={{ top: 1.51, left: 3.5 }}
+                  frame={frame}
+                  src={require("../assets/images/room_elements/plant_1_sheet.png")}
+                />
                 <Pressable
                   style={[styles.pressable, styles.mustachion]}
                   onPressOut={() => {
@@ -209,14 +202,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: "press-start",
   },
-  pressable: {
-    // backgroundColor: "rgba(255,250,250,.8)",
-    // borderRadius: 10
-  },
-  sheet: {
-    position: "absolute",
-    overflow: "hidden",
-  },
   backgroundImage: {
     height: SCREEN.height * 0.95,
     width: SCREEN.height * 1.125 * 0.95,
@@ -228,14 +213,6 @@ const styles = StyleSheet.create({
   mediumImage: {
     height: (SCREEN.height * 0.95) / 8,
     width: (SCREEN.height * 1.125 * 0.95) / 8,
-  },
-  smallImage: {
-    height: (SCREEN.height * 0.95) / 12,
-    width: (SCREEN.height * 1.125 * 0.95) / 12,
-  },
-  smallImageSprite: {
-    height: ((SCREEN.height * 0.95) / 12) * 4,
-    // width: ((SCREEN.height * 1.125 * 0.95) / 12),
   },
   longImage: {
     height: (SCREEN.height * 0.95) / 8.5,
@@ -274,10 +251,5 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 2.2,
     left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 7,
-  },
-  plant: {
-    position: "absolute",
-    top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 1.51,
-    left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 3.5,
   },
 });
