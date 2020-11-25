@@ -17,6 +17,7 @@ import Element from "./element";
 import { GameLoop } from "react-native-game-engine";
 //* expo *//
 import { Audio } from "expo-av";
+import { min } from "react-native-reanimated";
 //* assets *//
 // import { Sounds, Images } from "./assets"; // TODO move final assets
 
@@ -25,13 +26,16 @@ import { Audio } from "expo-av";
 //  * GAME_ENGINE: https://www.npmjs.com/package/react-native-game-engine
 // *
 
-export default () => {
+export default function Game() {
   const [introVisible, setIntroVisible] = useState(false); // needs to hatch
-  const [daytime, setTime] = useState(true); // keep track of time
   const [mustachionType, setType] = useState(0);
-  const [animClock, tick] = useState(null);
+  const [seconds, tick] = useState(0);
+  const [minutes, tock] = useState(0);
+  const [hours, ding] = useState(0);
+  const [days, dong] = useState(0);
   const [frame, updateFrame] = useState(0);
-  const [pause, countPause] = useState(0);
+  const [timeOfDay, setTime] = useState(STATE.get("timeOfDay")); // keep track of time
+  // const [pause, countPause] = useState(0);
   const init = () => {};
   const update = ({ touches, screen, layout, time }) => {
     let press = touches.find((x) => x.type === "press");
@@ -41,17 +45,24 @@ export default () => {
     animate(time);
   };
   const animate = (time) => {
-    if (!animClock) tick(time.current);
-    else if (time.current - animClock > 250) {
-      // STATE.update(
-      //   ["mustachion", "type"],
-      //   (STATE.check(["mustachion", "type"]) + 1) % 3
-      // );
-      // setType(STATE.check(["mustachion", "type"]));
+    if (time.current - seconds > 250) {
+      // STATE.set("mustachion/type", (STATE.get("mustachion/type") + 1) % 3);
+      // setType(STATE.get("mustachion/type"));
       tick(time.current);
-      countPause((pause + 1) % 36);
-      if (pause < 4 || (pause > 8 && pause < 16)) {
-        updateFrame((frame + 1) % 4);
+      tock(minutes + 1);
+      updateFrame((frame + 1) % 32);
+    }
+    if (minutes >= 60) {
+      tock(0);
+      ding(hours + 1);
+      console.log(hours);
+      STATE.set("timeOfDay", timeOfDay);
+      if (hours === 12) {
+        setTime((timeOfDay + 1) % 2);
+      } else if (hours >= 24) {
+        setTime((timeOfDay + 1) % 2);
+        ding(0);
+        dong(days + 1);
       }
     }
   };
@@ -97,23 +108,21 @@ export default () => {
           <GameLoop onUpdate={update}>
             <ImageBackground
               style={styles.backgroundImage}
-              source={daytime ? window.day : window.night}
+              source={timeOfDay === 0 ? window.day : window.night}
             >
               <ImageBackground
                 style={styles.backgroundImage}
                 source={require("../assets/images/room_elements/bookshelf.png")}
               >
-                <Pressable
-                  style={[styles.pressable, styles.books]}
-                  onPressOut={() => {
-                    // alert("books");
-                  }}
-                >
-                  <Image
-                    style={styles.smallImage}
-                    source={require("../assets/images/room_elements/books.png")}
-                  ></Image>
-                </Pressable>
+                <Element
+                  name={"books"}
+                  sizeDiv={7.5}
+                  position={{ top: 1.365, left: 1.04 }}
+                  tiles={1}
+                  frame={frame}
+                  range={{ min: 0, max: 0 }}
+                  src={require("../assets/images/room_elements/books.png")}
+                />
                 <Pressable
                   style={[styles.pressable, styles.mirror]}
                   onPressOut={() => {
@@ -147,22 +156,23 @@ export default () => {
                     source={require("../assets/images/room_elements/speaker.png")}
                   ></Image>
                 </Pressable>
-                <Pressable
-                  style={[styles.pressable, styles.fishbowl]}
-                  onPressOut={() => {
-                    alert("zoom fish");
-                  }}
-                >
-                  <Image
-                    style={styles.mediumImage}
-                    source={require("../assets/images/room_elements/fish_bowl.png")}
-                  ></Image>
-                </Pressable>
+                <Element
+                  name={"fish"}
+                  sizeDiv={8}
+                  position={{ top: 2.1, left: 13 }}
+                  tiles={1}
+                  frame={frame}
+                  range={{ min: 0, max: 0 }}
+                  src={require("../assets/images/room_elements/fish_bowl.png")}
+                />
                 <Element
                   name={"plant"}
+                  // press={}
                   sizeDiv={12}
-                  position={{ top: 1.51, left: 3.5 }}
+                  position={{ top: 1.468, left: 4.3 }}
+                  tiles={4}
                   frame={frame}
+                  range={{ min: 0, max: 12 }}
                   src={require("../assets/images/room_elements/plant_1_sheet.png")}
                 />
                 <Pressable
@@ -183,7 +193,7 @@ export default () => {
       </ScrollView>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -227,11 +237,6 @@ const styles = StyleSheet.create({
     top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 3.4,
     left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 4.5,
   },
-  books: {
-    position: "absolute",
-    top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 1.45,
-    left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 1.035,
-  },
   mirror: {
     position: "absolute",
     top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 1.5,
@@ -246,10 +251,5 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 2.28,
     left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 2.15,
-  },
-  fishbowl: {
-    position: "absolute",
-    top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 2.2,
-    left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 7,
   },
 });

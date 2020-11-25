@@ -2,10 +2,14 @@ import React from "react";
 import { Image, Pressable, View } from "react-native";
 import SCREEN from "../constants/screen";
 
-export default (props) => {
-  let height = SCREEN.height * 0.95;
-  let width = SCREEN.height * 1.125 * 0.95;
-  let { name, press, sizeDiv, position, frame, src } = props;
+export default function Element(props) {
+  const { name, press, sizeDiv, position, tiles, frame, range, src } = props,
+    height = SCREEN.height,
+    width = SCREEN.height;
+  const margin =
+    frame > range.min && frame < range.max
+      ? -(height / sizeDiv) * (frame % tiles)
+      : 0;
   return (
     <Pressable
       style={{
@@ -25,12 +29,12 @@ export default (props) => {
       >
         <Image
           style={{
-            height: (height / sizeDiv) * 4,
-            marginTop: -(height / sizeDiv) * frame,
+            height: (height / sizeDiv) * tiles,
+            marginTop: margin,
           }}
           source={src}
         ></Image>
       </View>
     </Pressable>
   );
-};
+}

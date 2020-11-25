@@ -61,7 +61,7 @@ function OptionsScreen({ navigation }) {
   );
 }
 
-export default () => {
+export default function App() {
   // const [fontLoaded, setFontLoaded] = useState(false);
   const [loaded, setLoaded] = useState(false);
   // const [gameData, setGameData] = useState(null);
@@ -73,10 +73,10 @@ export default () => {
       "press-start": require("./assets/fonts/PressStart2P-Regular.ttf"),
     });
 
-  const fetchData = () => STATE.get();
+  const fetchData = () => STATE.fetchStorage();
 
   const fetchAll = async () => {
-    await Promise.all([fetchFont(), fetchData()])
+    await Promise.all([fetchFont(), fetchData()]);
   };
 
   if (!loaded) {
@@ -88,7 +88,7 @@ export default () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Menu"
+        initialRouteName="Game" // TODO change back to "Menu"
         screenOptions={{
           headerStyle: styles.defaultHeader,
           headerTitleStyle: {

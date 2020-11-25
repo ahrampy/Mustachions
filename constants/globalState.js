@@ -29,19 +29,22 @@ const STORE = {
 };
 
 const STATE = {
-  get: async () => {
+  fetchStorage: async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("@game_Data");
       const data = jsonValue != null ? JSON.parse(jsonValue) : null;
-      if (!data) STATE.set();
-      else STATE.map(data, STORE);
+      if (!data) {
+        STATE.updateStorage();
+      } else {
+        STATE.mapState(data, STORE);
+      }
       return true;
     } catch (e) {
-      console.log("local storage data fetch failed ~~ " + e.message);
+      console.log("local storage data fetchStorage failed ~~ " + e.message);
       return false;
     }
   },
-  set: async () => {
+  updateStorage: async () => {
     try {
       const jsonValue = JSON.stringify(STORE);
       await AsyncStorage.setItem("@game_Data", jsonValue);
@@ -51,18 +54,19 @@ const STATE = {
       return false;
     }
   },
-  map: (data, obj) => {
+  mapState: (data, obj) => {
     for (let key in data) {
       if (Array.isArray(data[key])) {
         obj[key] = data[key].slice(0);
       } else if (typeof data[key] === "object" && data[key] !== null) {
-        STATE.map(data[key], obj[key]);
+        STATE.mapState(data[key], obj[key]);
       } else {
         obj[key] = data[key];
       }
     }
   },
-  check: (path) => {
+  get: (path) => {
+    path = path.split("/");
     let dest = STORE;
     while (path.length > 1) {
       dest = dest[path.shift()];
@@ -73,14 +77,15 @@ const STATE = {
       return false;
     }
   },
-  update: (path, value) => {
+  set: (path, value) => {
+    path = path.split("/");
     let dest = STORE;
     while (path.length > 1) {
       dest = dest[path.shift()];
     }
     if (dest[path[0]] !== undefined) {
       dest[path[0]] = value;
-      STATE.set();
+      STATE.updateStorage();
       return true;
     } else {
       return false;
@@ -90,7 +95,7 @@ const STATE = {
     const arr = STORE.items.owned[category];
     if (Array.isArray(arr)) {
       arr.push(type);
-      STATE.set();
+      STATE.updateStorage();
       return true;
     } else {
       return false;
