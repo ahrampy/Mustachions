@@ -61,7 +61,7 @@ function OptionsScreen({ navigation }) {
   );
 }
 
-export default function App() {
+export default () => {
   // const [fontLoaded, setFontLoaded] = useState(false);
   const [loaded, setLoaded] = useState(false);
   // const [gameData, setGameData] = useState(null);

@@ -24,10 +24,12 @@ import { Audio } from "expo-av";
 // *
 
 export default () => {
-  const [introVisible, setIntroVisible] = useState(false); // needs to hatch
+  const [introVisible, setIntroVisible] = useState(true); // needs to hatch
   const [daytime, setTime] = useState(true); // keep track of time
   const [mustachionType, setType] = useState(0);
   const [animClock, tick] = useState(null);
+  const [frame, updateFrame] = useState(0);
+  const [pause, countPause] = useState(0);
   const init = () => {};
   const update = ({ touches, screen, layout, time }) => {
     let press = touches.find((x) => x.type === "press");
@@ -38,13 +40,17 @@ export default () => {
   };
   const animate = (time) => {
     if (!animClock) tick(time.current);
-    else if (time.current - animClock > 150) {
+    else if (time.current - animClock > 250) {
       // STATE.update(
       //   ["mustachion", "type"],
       //   (STATE.check(["mustachion", "type"]) + 1) % 3
       // );
       // setType(STATE.check(["mustachion", "type"]));
       tick(time.current);
+      countPause((pause + 1) % 36);
+      if (pause < 4 || (pause > 8 && pause < 16)) {
+        updateFrame((frame + 1) % 4);
+      }
     }
   };
   const sounds = {
@@ -120,7 +126,7 @@ export default () => {
                 <Pressable
                   style={[styles.pressable, styles.piano]}
                   onPressOut={() => {
-                    // alert("piano");
+                    alert("zoom piano");
                   }}
                 >
                   <Image
@@ -142,7 +148,7 @@ export default () => {
                 <Pressable
                   style={[styles.pressable, styles.fishbowl]}
                   onPressOut={() => {
-                    // alert("fishbowl");
+                    alert("zoom fish");
                   }}
                 >
                   <Image
@@ -156,10 +162,15 @@ export default () => {
                     // alert("plant");
                   }}
                 >
-                  <Image
-                    style={styles.smallImage}
-                    source={require("../assets/images/room_elements/plant.png")}
-                  ></Image>
+                  <View style={[styles.sheet, styles.smallImage]}>
+                    <Image
+                      style={[
+                        styles.smallImageSprite,
+                        { marginTop: -((SCREEN.height * 0.95) / 12) * frame },
+                      ]}
+                      source={require("../assets/images/room_elements/plant_1_sheet.png")}
+                    ></Image>
+                  </View>
                 </Pressable>
                 <Pressable
                   style={[styles.pressable, styles.mustachion]}
@@ -202,6 +213,10 @@ const styles = StyleSheet.create({
     // backgroundColor: "rgba(255,250,250,.8)",
     // borderRadius: 10
   },
+  sheet: {
+    position: "absolute",
+    overflow: "hidden",
+  },
   backgroundImage: {
     height: SCREEN.height * 0.95,
     width: SCREEN.height * 1.125 * 0.95,
@@ -217,6 +232,10 @@ const styles = StyleSheet.create({
   smallImage: {
     height: (SCREEN.height * 0.95) / 12,
     width: (SCREEN.height * 1.125 * 0.95) / 12,
+  },
+  smallImageSprite: {
+    height: ((SCREEN.height * 0.95) / 12) * 4,
+    // width: ((SCREEN.height * 1.125 * 0.95) / 12),
   },
   longImage: {
     height: (SCREEN.height * 0.95) / 8.5,
@@ -258,7 +277,7 @@ const styles = StyleSheet.create({
   },
   plant: {
     position: "absolute",
-    top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 1.5,
-    left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 3.4,
+    top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 1.51,
+    left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 3.5,
   },
 });
