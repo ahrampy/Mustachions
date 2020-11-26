@@ -4,7 +4,6 @@ import {
   View,
   ScrollView,
   ImageBackground,
-  Image,
   Pressable,
   Modal,
 } from "react-native";
@@ -17,7 +16,6 @@ import Element from "./element";
 import { GameLoop } from "react-native-game-engine";
 //* expo *//
 import { Audio, Video } from "expo-av";
-import { min } from "react-native-reanimated";
 //* assets *//
 // import { Sounds, Images } from "./assets"; // TODO move final assets
 
@@ -27,7 +25,23 @@ import { min } from "react-native-reanimated";
 // *
 
 export default function Game() {
-  const [introVisible, setIntroVisible] = useState(true); // needs to hatch // TODO add to STATE
+  //* temp assets *//
+  const sounds = {
+    greyDay: null,
+    fishBowl: null
+  };
+  const window = {
+    day: require("../assets/images/room_elements/sunny_day_window.png"),
+    night: require("../assets/images/room_elements/starry_night_window.png"),
+  };
+  const mustachions = [
+    require("../assets/images/mustachions/mustachion_1.png"),
+    require("../assets/images/mustachions/mustachion_2.png"),
+    require("../assets/images/mustachions/mustachion_3.png"),
+  ];
+
+  //* hooks *//
+  const [introVisible, setIntroVisible] = useState(false); // needs to hatch // TODO add to STATE
   const [fishBowlVisible, setFishBowlVisible] = useState(false);
   const [mustMoving, moveMust] = useState(false);
   //* keep time *//
@@ -37,9 +51,25 @@ export default function Game() {
   const [days, dong] = useState(0);
   const [frame, updateFrame] = useState(0);
   const [timeOfDay, setTime] = useState(STATE.get("timeOfDay"));
+  //* start *//
+  const init = async () => {
+    try {
+      sounds.greyDay = await Audio.Sound.createAsync(
+        require("../assets/sounds/grey_day.wav"),
+        { shouldPlay: true, isLooping: true }
+      );
+      // Your sound is playing!
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   //* animations and time of day *//
   const update = ({ touches, screen, layout, time }) => {
-    // let press = touches.find((x) => x.type === "press");
+    let press = touches.find((x) => x.type === "press");
+    // if (press && (introVisible || fishBowlVisible)) {
+    //   setIntroVisible(false)
+    //   setFishBowlVisible(false)
+    // }
     animate(time);
   };
   const animate = (time) => {
@@ -63,24 +93,11 @@ export default function Game() {
       }
     }
   };
-  //* temp assets *//
-  const sounds = {
-    // grey_day: new Audio("../assets/sounds/grey_day.wav"),
-  };
-  const window = {
-    day: require("../assets/images/room_elements/sunny_day_window.png"),
-    night: require("../assets/images/room_elements/starry_night_window.png"),
-  };
-  const mustachions = [
-    require("../assets/images/mustachions/mustachion_1.png"),
-    require("../assets/images/mustachions/mustachion_2.png"),
-    require("../assets/images/mustachions/mustachion_3.png"),
-  ];
 
   //* on load *//
-  // useEffect(() => {
-  //   init();
-  // }, []);
+  useEffect(() => {
+    init();
+  }, []);
 
   useEffect(() => {
     let closeIntro = setTimeout(() => {
@@ -94,31 +111,31 @@ export default function Game() {
   return (
     <View style={styles.container}>
       <Modal style={styles.modal} visible={introVisible} animationType={"fade"}>
-        {/* <Image
-          style={styles.closeUp}
-          source={require("../assets/videos/egg-no-repeat.gif")}
-        ></Image> */}
-        <Video
-          source={require("../assets/videos/egg.mp4")}
-          rate={1.0}
-          resizeMode="cover"
-          shouldPlay
-          style={styles.closeUp}
-        />
+        <Pressable onLongPress={() => setIntroVisible(false)}>
+          <Video
+            source={require("../assets/videos/egg.mp4")}
+            rate={1.0}
+            resizeMode="cover"
+            shouldPlay
+            style={styles.closeUp}
+          />
+        </Pressable>
       </Modal>
       <Modal
         style={styles.modal}
         visible={fishBowlVisible}
         animationType={"fade"}
       >
-        <Video
-          source={require("../assets/videos/goldfish_animation.mp4")}
-          rate={1.0}
-          resizeMode="cover"
-          shouldPlay
-          isLooping
-          style={styles.closeUp}
-        />
+        <Pressable onLongPress={() => setFishBowlVisible(false)}>
+          <Video
+            source={require("../assets/videos/goldfish_animation.mp4")}
+            rate={1.0}
+            resizeMode="cover"
+            shouldPlay
+            isLooping
+            style={styles.closeUp}
+          />
+        </Pressable>
       </Modal>
       <ScrollView horizontal={true} bounces={false}>
         <ImageBackground
