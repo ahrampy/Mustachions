@@ -16,7 +16,7 @@ import Element from "./element";
 //* game engine *//
 import { GameLoop } from "react-native-game-engine";
 //* expo *//
-import { Audio } from "expo-av";
+import { Audio, Video } from "expo-av";
 import { min } from "react-native-reanimated";
 //* assets *//
 // import { Sounds, Images } from "./assets"; // TODO move final assets
@@ -27,21 +27,19 @@ import { min } from "react-native-reanimated";
 // *
 
 export default function Game() {
-  const [introVisible, setIntroVisible] = useState(false); // needs to hatch
-  const [mustachionType, setType] = useState(0);
+  const [introVisible, setIntroVisible] = useState(true); // needs to hatch // TODO add to STATE
+  const [fishBowlVisible, setFishBowlVisible] = useState(false);
+  const [mustMoving, moveMust] = useState(false);
+  //* keep time *//
   const [seconds, tick] = useState(0);
   const [minutes, tock] = useState(0);
   const [hours, ding] = useState(0);
   const [days, dong] = useState(0);
   const [frame, updateFrame] = useState(0);
-  const [timeOfDay, setTime] = useState(STATE.get("timeOfDay")); // keep track of time
-  // const [pause, countPause] = useState(0);
-  const init = () => {};
+  const [timeOfDay, setTime] = useState(STATE.get("timeOfDay"));
+  //* animations and time of day *//
   const update = ({ touches, screen, layout, time }) => {
-    let press = touches.find((x) => x.type === "press");
-    if (press) {
-      // console.log(press);
-    }
+    // let press = touches.find((x) => x.type === "press");
     animate(time);
   };
   const animate = (time) => {
@@ -55,7 +53,6 @@ export default function Game() {
     if (minutes >= 60) {
       tock(0);
       ding(hours + 1);
-      console.log(hours);
       STATE.set("timeOfDay", timeOfDay);
       if (hours === 12) {
         setTime((timeOfDay + 1) % 2);
@@ -66,6 +63,7 @@ export default function Game() {
       }
     }
   };
+  //* temp assets *//
   const sounds = {
     // grey_day: new Audio("../assets/sounds/grey_day.wav"),
   };
@@ -79,9 +77,10 @@ export default function Game() {
     require("../assets/images/mustachions/mustachion_3.png"),
   ];
 
-  useEffect(() => {
-    init();
-  }, []);
+  //* on load *//
+  // useEffect(() => {
+  //   init();
+  // }, []);
 
   useEffect(() => {
     let closeIntro = setTimeout(() => {
@@ -94,11 +93,32 @@ export default function Game() {
 
   return (
     <View style={styles.container}>
-      <Modal style={styles.intro} visible={introVisible} animationType={"fade"}>
-        <Image
-          style={styles.gif}
-          source={require("../assets/images/egg-no-repeat.gif")}
-        ></Image>
+      <Modal style={styles.modal} visible={introVisible} animationType={"fade"}>
+        {/* <Image
+          style={styles.closeUp}
+          source={require("../assets/videos/egg-no-repeat.gif")}
+        ></Image> */}
+        <Video
+          source={require("../assets/videos/egg.mp4")}
+          rate={1.0}
+          resizeMode="cover"
+          shouldPlay
+          style={styles.closeUp}
+        />
+      </Modal>
+      <Modal
+        style={styles.modal}
+        visible={fishBowlVisible}
+        animationType={"fade"}
+      >
+        <Video
+          source={require("../assets/videos/goldfish_animation.mp4")}
+          rate={1.0}
+          resizeMode="cover"
+          shouldPlay
+          isLooping
+          style={styles.closeUp}
+        />
       </Modal>
       <ScrollView horizontal={true} bounces={false}>
         <ImageBackground
@@ -123,41 +143,36 @@ export default function Game() {
                   range={{ min: 0, max: 0 }}
                   src={require("../assets/images/room_elements/books.png")}
                 />
-                <Pressable
-                  style={[styles.pressable, styles.mirror]}
-                  onPressOut={() => {
-                    // alert("mirror");
-                  }}
-                >
-                  <Image
-                    style={styles.mediumImage}
-                    source={require("../assets/images/room_elements/mirror.png")}
-                  ></Image>
-                </Pressable>
-                <Pressable
-                  style={[styles.pressable, styles.piano]}
-                  onPressOut={() => {
-                    alert("zoom piano");
-                  }}
-                >
-                  <Image
-                    style={styles.longImage}
-                    source={require("../assets/images/room_elements/piano.png")}
-                  ></Image>
-                </Pressable>
-                <Pressable
-                  style={[styles.pressable, styles.speaker]}
-                  onPressOut={() => {
-                    // alert("speaker");
-                  }}
-                >
-                  <Image
-                    style={styles.tallImage}
-                    source={require("../assets/images/room_elements/speaker.png")}
-                  ></Image>
-                </Pressable>
+                <Element
+                  name={"mirror"}
+                  sizeDiv={8}
+                  position={{ top: 1.5, left: 1.45 }}
+                  tiles={1}
+                  frame={frame}
+                  range={{ min: 0, max: 0 }}
+                  src={require("../assets/images/room_elements/mirror.png")}
+                />
+                <Element
+                  name={"piano"}
+                  sizeDiv={3}
+                  position={{ top: 1.7, left: 1.5 }}
+                  tiles={1}
+                  frame={frame}
+                  range={{ min: 0, max: 0 }}
+                  src={require("../assets/images/room_elements/piano.png")}
+                />
+                <Element
+                  name={"speaker"}
+                  sizeDiv={7}
+                  position={{ top: 2.09, left: 2.1 }}
+                  tiles={1}
+                  frame={frame}
+                  range={{ min: 0, max: 0 }}
+                  src={require("../assets/images/room_elements/speaker.png")}
+                />
                 <Element
                   name={"fish"}
+                  press={() => setFishBowlVisible(true)}
                   sizeDiv={8}
                   position={{ top: 2.1, left: 13 }}
                   tiles={1}
@@ -167,7 +182,6 @@ export default function Game() {
                 />
                 <Element
                   name={"plant"}
-                  // press={}
                   sizeDiv={12}
                   position={{ top: 1.468, left: 4.3 }}
                   tiles={4}
@@ -175,17 +189,21 @@ export default function Game() {
                   range={{ min: 0, max: 12 }}
                   src={require("../assets/images/room_elements/plant_1_sheet.png")}
                 />
-                <Pressable
-                  style={[styles.pressable, styles.mustachion]}
-                  onPressOut={() => {
-                    setType((mustachionType + 1) % 3);
+                <Element
+                  name={"mustachion"}
+                  press={() => {
+                    moveMust(true);
+                    setTimeout(() => {
+                      moveMust(false);
+                    }, 2000);
                   }}
-                >
-                  <Image
-                    style={styles.largeImage}
-                    source={mustachions[mustachionType]}
-                  ></Image>
-                </Pressable>
+                  sizeDiv={5.5}
+                  position={{ top: 3.4, left: 4.5 }}
+                  tiles={4}
+                  frame={frame}
+                  range={{ min: 0, max: mustMoving ? 32 : 0 }}
+                  src={mustachions[STATE.get("mustachion/type")]}
+                />
               </ImageBackground>
             </ImageBackground>
           </GameLoop>
@@ -200,11 +218,11 @@ const styles = StyleSheet.create({
     flex: 1,
     height: SCREEN.height,
   },
-  intro: {
+  modal: {
     height: SCREEN.height,
     width: SCREEN.width,
   },
-  gif: {
+  closeUp: {
     width: "100%",
     height: "100%",
   },
@@ -215,41 +233,5 @@ const styles = StyleSheet.create({
   backgroundImage: {
     height: SCREEN.height * 0.95,
     width: SCREEN.height * 1.125 * 0.95,
-  },
-  largeImage: {
-    height: (SCREEN.height * 0.95) / 6,
-    width: (SCREEN.height * 1.125 * 0.95) / 6,
-  },
-  mediumImage: {
-    height: (SCREEN.height * 0.95) / 8,
-    width: (SCREEN.height * 1.125 * 0.95) / 8,
-  },
-  longImage: {
-    height: (SCREEN.height * 0.95) / 8.5,
-    width: (SCREEN.height * 1.125 * 0.95) / 4.5,
-  },
-  tallImage: {
-    height: (SCREEN.height * 0.95) / 9,
-    width: (SCREEN.height * 1.125 * 0.95) / 16,
-  },
-  mustachion: {
-    position: "absolute",
-    top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 3.4,
-    left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 4.5,
-  },
-  mirror: {
-    position: "absolute",
-    top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 1.5,
-    left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 1.4,
-  },
-  piano: {
-    position: "absolute",
-    top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 2.2,
-    left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 1.45,
-  },
-  speaker: {
-    position: "absolute",
-    top: SCREEN.height * 0.95 - (SCREEN.height * 0.95) / 2.28,
-    left: SCREEN.height * 1.125 * 0.95 - (SCREEN.height * 1.125 * 0.95) / 2.15,
   },
 });

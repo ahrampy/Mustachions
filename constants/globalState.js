@@ -1,6 +1,7 @@
 import { AsyncStorage } from "react-native";
 
 const STORE = {
+  // lastTick: 0, // TODO add tick persistence
   timeOfDay: 0,
   mustachion: {
     type: 0,

@@ -17,7 +17,7 @@ export default function Element(props) {
         top: height - height / position.top,
         left: width - width / position.left,
       }}
-      onPressOut={() => alert(name)}
+      onPressOut={press}
     >
       <View
         style={{
