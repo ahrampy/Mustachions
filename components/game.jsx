@@ -25,27 +25,13 @@ import { Sounds, Images } from "./entities/assets"; // TODO move final assets
 // *
 
 export default function Game(props) {
-  //* temp assets *//
-  // const audio = {
-  //   greyDay: null,
-  //   fishBowl: null,
-  // };
-  const window = {
-    day: require("../assets/images/room_elements/sunny_day_window.png"),
-    night: require("../assets/images/room_elements/starry_night_window.png"),
-  };
-  const mustachions = [
-    require("../assets/images/mustachions/mustachion_1.png"),
-    require("../assets/images/mustachions/mustachion_2.png"),
-    require("../assets/images/mustachions/mustachion_3.png"),
-  ];
-
-  //* hooks *//
+  //* modals *//
   const [introVisible, setIntroVisible] = useState(false); // needs to hatch // TODO add to STATE
   const [fishBowlVisible, setFishBowlVisible] = useState(false);
+  //* actions *//
   const [mustMoving, moveMust] = useState(false);
-  //* keep time *//
   const [frame, updateFrame] = useState(0);
+  //* time *//
   const [seconds, tick] = useState(0);
   const [minutes, tock] = useState(0);
   const [hours, ding] = useState(0);
@@ -54,7 +40,11 @@ export default function Game(props) {
   //* start *//
   const init = () => {
     const subs = [];
-    Sounds.greyDay.sound.playAsync();
+    subs.push(
+      props.navigation.addListener("focus", () =>
+        Sounds.greyDay.sound.playAsync()
+      )
+    );
     subs.push(
       props.navigation.addListener("blur", () =>
         Sounds.greyDay.sound.pauseAsync()
@@ -110,6 +100,18 @@ export default function Game(props) {
     };
   }, [introVisible]);
 
+  const showFishBowl = () => {
+    Sounds.greyDay.sound.pauseAsync();
+    Sounds.fishBowl.sound.playAsync();
+    setFishBowlVisible(true);
+  };
+
+  const hideFishBowl = () => {
+    Sounds.fishBowl.sound.pauseAsync();
+    Sounds.greyDay.sound.playAsync();
+    setFishBowlVisible(false);
+  };
+
   return (
     <View style={styles.container}>
       <Modal style={styles.modal} visible={introVisible} animationType={"fade"}>
@@ -128,7 +130,7 @@ export default function Game(props) {
         visible={fishBowlVisible}
         animationType={"fade"}
       >
-        <Pressable onLongPress={() => setFishBowlVisible(false)}>
+        <Pressable onLongPress={() => hideFishBowl()}>
           <Video
             source={require("../assets/videos/goldfish_animation.mp4")}
             rate={1.0}
@@ -147,7 +149,9 @@ export default function Game(props) {
           <GameLoop onUpdate={update}>
             <ImageBackground
               style={styles.backgroundImage}
-              source={timeOfDay > 12 ? window.day : window.night}
+              source={
+                timeOfDay > 12 ? Images.room.windowDay : Images.room.windowNight
+              }
             >
               <ImageBackground
                 style={styles.backgroundImage}
@@ -191,7 +195,7 @@ export default function Game(props) {
                 />
                 <Element
                   name={"fish"}
-                  press={() => setFishBowlVisible(true)}
+                  press={() => showFishBowl()}
                   sizeDiv={8}
                   position={{ top: 2.1, left: 13 }}
                   tiles={1}
@@ -221,7 +225,7 @@ export default function Game(props) {
                   tiles={4}
                   frame={frame}
                   range={{ min: 0, max: mustMoving ? 32 : 0 }}
-                  src={mustachions[STATE.get("mustachion/type")]}
+                  src={Images.mustachions[STATE.get("mustachion/type")]}
                 />
               </ImageBackground>
             </ImageBackground>
