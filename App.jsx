@@ -12,6 +12,8 @@ import Store from "./components/store";
 import Options from "./components/options";
 import Game from "./components/game";
 import Island from "./components/island";
+//* assets *//
+import { loadAssets } from "./components/entities/assets";
 //* expo *//
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
@@ -29,10 +31,10 @@ function MenuScreen({ navigation }) {
   );
 }
 
-function GameScreen() {
+function GameScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Game></Game>
+      <Game navigation={navigation}></Game>
     </View>
   );
 }
@@ -76,7 +78,7 @@ export default function App() {
   const fetchData = () => STATE.fetchStorage();
 
   const fetchAll = async () => {
-    await Promise.all([fetchFont(), fetchData()]);
+    await Promise.all([fetchFont(), fetchData(), loadAssets()]);
   };
 
   if (!loaded) {
@@ -88,7 +90,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Game" // TODO change back to "Menu"
+        initialRouteName="Menu" // TODO change back to "Menu"
         screenOptions={{
           headerStyle: styles.defaultHeader,
           headerTitleStyle: {

@@ -15,21 +15,21 @@ import Element from "./element";
 //* game engine *//
 import { GameLoop } from "react-native-game-engine";
 //* expo *//
-import { Audio, Video } from "expo-av";
+import { Video } from "expo-av";
 //* assets *//
-// import { Sounds, Images } from "./assets"; // TODO move final assets
+import { Sounds, Images } from "./entities/assets"; // TODO move final assets
 
 // * DOCS
 //  * SCROLLVIEW: https://reactnative.dev/docs/scrollview
 //  * GAME_ENGINE: https://www.npmjs.com/package/react-native-game-engine
 // *
 
-export default function Game() {
+export default function Game(props) {
   //* temp assets *//
-  const sounds = {
-    greyDay: null,
-    fishBowl: null
-  };
+  // const audio = {
+  //   greyDay: null,
+  //   fishBowl: null,
+  // };
   const window = {
     day: require("../assets/images/room_elements/sunny_day_window.png"),
     night: require("../assets/images/room_elements/starry_night_window.png"),
@@ -45,24 +45,24 @@ export default function Game() {
   const [fishBowlVisible, setFishBowlVisible] = useState(false);
   const [mustMoving, moveMust] = useState(false);
   //* keep time *//
+  const [frame, updateFrame] = useState(0);
   const [seconds, tick] = useState(0);
   const [minutes, tock] = useState(0);
   const [hours, ding] = useState(0);
-  const [days, dong] = useState(0);
-  const [frame, updateFrame] = useState(0);
+  const [days, dong] = useState(STATE.get("days"));
   const [timeOfDay, setTime] = useState(STATE.get("timeOfDay"));
   //* start *//
-  const init = async () => {
-    try {
-      sounds.greyDay = await Audio.Sound.createAsync(
-        require("../assets/sounds/grey_day.wav"),
-        { shouldPlay: true, isLooping: true }
-      );
-      // Your sound is playing!
-    } catch (error) {
-      console.log(error.message);
-    }
+  const init = () => {
+    const subs = [];
+    Sounds.greyDay.sound.playAsync();
+    subs.push(
+      props.navigation.addListener("blur", () =>
+        Sounds.greyDay.sound.pauseAsync()
+      )
+    );
+    return subs;
   };
+
   //* animations and time of day *//
   const update = ({ touches, screen, layout, time }) => {
     let press = touches.find((x) => x.type === "press");
@@ -85,18 +85,20 @@ export default function Game() {
       ding(hours + 1);
       STATE.set("timeOfDay", timeOfDay);
       if (hours === 12) {
-        setTime((timeOfDay + 1) % 2);
+        setTime((timeOfDay + 1) % 24);
       } else if (hours >= 24) {
-        setTime((timeOfDay + 1) % 2);
+        setTime((timeOfDay + 1) % 24);
         ding(0);
         dong(days + 1);
+        STATE.set("days", days);
       }
     }
   };
 
   //* on load *//
   useEffect(() => {
-    init();
+    const subs = init();
+    return () => subs.forEach((unsub) => unsub());
   }, []);
 
   useEffect(() => {
@@ -145,7 +147,7 @@ export default function Game() {
           <GameLoop onUpdate={update}>
             <ImageBackground
               style={styles.backgroundImage}
-              source={timeOfDay === 0 ? window.day : window.night}
+              source={timeOfDay > 12 ? window.day : window.night}
             >
               <ImageBackground
                 style={styles.backgroundImage}
