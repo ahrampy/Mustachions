@@ -18,52 +18,8 @@ import { loadAssets, Images } from "./components/entities/assets";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
 
-const Stack = createStackNavigator();
-
-// TODO change stack navigator safe zone
-// TODO move Screen wrappers to components
-
-function MenuScreen({ navigation }) {
-  return (
-    <View style={styles.container}>
-      <Menu navigation={navigation}></Menu>
-    </View>
-  );
-}
-
-function GameScreen({ navigation }) {
-  return (
-    <View style={styles.container}>
-      <Game navigation={navigation}></Game>
-    </View>
-  );
-}
-
-function IslandScreen() {
-  return (
-    <View style={styles.container}>
-      <Island></Island>
-    </View>
-  );
-}
-
-function StoreScreen({ navigation }) {
-  return (
-    <View style={styles.container}>
-      <Store navigation={navigation}></Store>
-    </View>
-  );
-}
-
-function OptionsScreen({ navigation }) {
-  return (
-    <View style={styles.container}>
-      <Options navigation={navigation}></Options>
-    </View>
-  );
-}
-
 export default function App() {
+  const Stack = createStackNavigator();
   const [loaded, setLoaded] = useState(false);
 
   const fetchFont = () =>
@@ -71,11 +27,8 @@ export default function App() {
       "press-start": require("./assets/fonts/PressStart2P-Regular.ttf"),
     });
 
-  const fetchData = () => STATE.fetchStorage();
-
-  const fetchAll = async () => {
-    await Promise.all([fetchFont(), fetchData(), loadAssets()]);
-  };
+  const fetchAll = async () =>
+    await Promise.all([fetchFont(), STATE.fetchStorage(), loadAssets()]);
 
   if (!loaded) {
     return (
@@ -100,24 +53,24 @@ export default function App() {
       >
         <Stack.Screen
           name="Menu"
-          component={MenuScreen}
+          component={Menu}
           options={{
             headerStyle: [styles.defaultHeader, styles.menuHeader],
             headerTitle: "Mustachions",
           }}
         />
-        <Stack.Screen name="Store" component={StoreScreen} />
-        <Stack.Screen name="Options" component={OptionsScreen} />
+        <Stack.Screen name="Store" component={Store} />
+        <Stack.Screen name="Options" component={Options} />
         <Stack.Screen
           name="Island"
-          component={IslandScreen}
+          component={Island}
           options={() => ({
             headerStyle: [styles.defaultHeader, styles.islandHeader],
           })}
         />
         <Stack.Screen
           name="Game"
-          component={GameScreen}
+          component={Game}
           options={({ navigation }) => ({
             headerStyle: [styles.defaultHeader, styles.gameHeader],
             gestureEnabled: false,
@@ -150,9 +103,10 @@ const styles = StyleSheet.create({
     elevation: 0,
     shadowOpacity: 0,
     borderBottomWidth: 0,
+    height: SCREEN.height * 0.1,
   },
   menuHeader: {
-    height: SCREEN.height * 0.1,
+    // TODO change main menu header
   },
   gameHeader: {
     backgroundColor: "#101626",
