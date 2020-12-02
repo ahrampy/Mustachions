@@ -160,7 +160,7 @@ export default function Game(props) {
                 <Element
                   name={"books"}
                   sizeDiv={7.5}
-                  position={{ top: 1.365, left: 1.04 }}
+                  position={{ top: 1.4, left: 1.045 }}
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
@@ -169,7 +169,7 @@ export default function Game(props) {
                 <Element
                   name={"mirror"}
                   sizeDiv={8}
-                  position={{ top: 1.5, left: 1.45 }}
+                  position={{ top: 1.5, left: 1.55 }}
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
@@ -178,7 +178,7 @@ export default function Game(props) {
                 <Element
                   name={"piano"}
                   sizeDiv={3}
-                  position={{ top: 1.7, left: 1.5 }}
+                  position={{ top: 1.8, left: 1.5 }}
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
@@ -187,7 +187,7 @@ export default function Game(props) {
                 <Element
                   name={"speaker"}
                   sizeDiv={7}
-                  position={{ top: 2.09, left: 2.1 }}
+                  position={{ top: 2.23, left: 2.1 }}
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
@@ -197,7 +197,7 @@ export default function Game(props) {
                   name={"fish"}
                   press={() => showFishBowl()}
                   sizeDiv={8}
-                  position={{ top: 2.1, left: 13 }}
+                  position={{ top: 2.3, left: 30 }}
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
@@ -206,7 +206,7 @@ export default function Game(props) {
                 <Element
                   name={"plant"}
                   sizeDiv={12}
-                  position={{ top: 1.468, left: 4.3 }}
+                  position={{ top: 1.51, left: 5.5 }}
                   tiles={4}
                   frame={frame}
                   range={{ min: 0, max: 12 }}
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
     fontFamily: "press-start",
   },
   backgroundImage: {
-    height: SCREEN.height * 0.95,
-    width: SCREEN.height * 1.125 * 0.95,
+    height: SCREEN.height,
+    width: SCREEN.height * 1.125,
   },
 });

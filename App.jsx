@@ -1,6 +1,6 @@
 //* react *//
-import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Pressable, Image, Text } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, Pressable, Image, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 //* constant *//
@@ -13,7 +13,7 @@ import Options from "./components/options";
 import Game from "./components/game";
 import Island from "./components/island";
 //* assets *//
-import { loadAssets } from "./components/entities/assets";
+import { loadAssets, Images } from "./components/entities/assets";
 //* expo *//
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
@@ -64,11 +64,7 @@ function OptionsScreen({ navigation }) {
 }
 
 export default function App() {
-  // const [fontLoaded, setFontLoaded] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  // const [gameData, setGameData] = useState(null);
-  // const [authState, setAuthState] = useState(null);
-  // const [player, setPlayer] = useState<any>(null);
 
   const fetchFont = () =>
     Font.loadAsync({
@@ -89,13 +85,17 @@ export default function App() {
 
   return (
     <NavigationContainer>
+      <StatusBar hidden />
+
       <Stack.Navigator
-        initialRouteName="Menu" // TODO change back to "Menu"
+        initialRouteName="Menu"
         screenOptions={{
           headerStyle: styles.defaultHeader,
           headerTitleStyle: {
             fontFamily: "press-start",
           },
+          headerBackTitleVisible: false,
+          headerBackImage: () => <Image source={Images.interface.arrow} />,
         }}
       >
         <Stack.Screen
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
   },
   menuHeader: {
-    height: SCREEN.height * 0.2,
+    height: SCREEN.height * 0.1,
   },
   gameHeader: {
     backgroundColor: "#101626",
