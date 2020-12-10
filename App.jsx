@@ -115,8 +115,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#C0BC95",
   },
   settings: {
-    width: 25,
-    height: 25,
+    width: 35,
+    height: 35,
     right: SCREEN.width * 0.02,
+    tintColor: "white",
   },
 });

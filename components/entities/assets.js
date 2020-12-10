@@ -7,6 +7,7 @@ const Sounds = {
 
 const Images = {
   interface: {
+    text: require("../../assets/images/text.png"),
     arrow: require("../../assets/images/interface/back_arrow.gif")
   },
   mustachions: {

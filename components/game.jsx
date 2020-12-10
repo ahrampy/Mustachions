@@ -159,8 +159,8 @@ export default function Game(props) {
               >
                 <Element
                   name={"books"}
-                  sizeDiv={7.5}
-                  position={{ top: 1.4, left: 1.045 }}
+                  size={.14}
+                  position={{ top: 28, left: 3.5 }}
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
@@ -168,8 +168,8 @@ export default function Game(props) {
                 />
                 <Element
                   name={"mirror"}
-                  sizeDiv={8}
-                  position={{ top: 1.5, left: 1.55 }}
+                  size={.12}
+                  position={{ top: 30, left: 30 }}
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
@@ -177,8 +177,8 @@ export default function Game(props) {
                 />
                 <Element
                   name={"piano"}
-                  sizeDiv={3}
-                  position={{ top: 1.8, left: 1.5 }}
+                  size={.32}
+                  position={{ top: 44, left: 25 }}
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
@@ -186,8 +186,8 @@ export default function Game(props) {
                 />
                 <Element
                   name={"speaker"}
-                  sizeDiv={7}
-                  position={{ top: 2.23, left: 2.1 }}
+                  size={.15}
+                  position={{ top: 53.5, left: 40 }}
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
@@ -196,8 +196,8 @@ export default function Game(props) {
                 <Element
                   name={"fish"}
                   press={() => showFishBowl()}
-                  sizeDiv={8}
-                  position={{ top: 2.3, left: 30 }}
+                  size={.13}
+                  position={{ top: 55, left: 78 }}
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
@@ -205,12 +205,21 @@ export default function Game(props) {
                 />
                 <Element
                   name={"plant"}
-                  sizeDiv={12}
-                  position={{ top: 1.51, left: 5.5 }}
+                  size={.08}
+                  position={{ top: 34, left: 64 }}
                   tiles={4}
                   frame={frame}
                   range={{ min: 0, max: 12 }}
                   src={require("../assets/images/room_elements/plant_1_sheet.png")}
+                />
+                <Element
+                  name={"text"}
+                  size={.10}
+                  position={{ top: 1.51, left: 2 }}
+                  tiles={1}
+                  frame={frame}
+                  range={{ min: 0, max: 0 }}
+                  src={require("../assets/images/text.png")}
                 />
                 <Element
                   name={"mustachion"}
@@ -220,8 +229,8 @@ export default function Game(props) {
                       moveMust(false);
                     }, 2000);
                   }}
-                  sizeDiv={5.5}
-                  position={{ top: 3.4, left: 4.5 }}
+                  size={.2}
+                  position={{ top: 65, left: 25 }}
                   tiles={4}
                   frame={frame}
                   range={{ min: 0, max: mustMoving ? 32 : 0 }}
@@ -238,7 +247,7 @@ export default function Game(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    position: "relative",
     height: SCREEN.height,
   },
   modal: {
