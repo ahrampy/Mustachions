@@ -2,13 +2,14 @@
   "main": "index.js",
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "expo start --ios",
     "web": "expo start --web",
     "publish": "expo publish --target managed",
     "start": "react-native start",
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.13.3",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/native": "^5.7.6",
     "@react-navigation/stack": "^5.9.3",
@@ -22,6 +23,7 @@
     "react-native": "~0.63.3",
     "react-native-game-engine": "^1.2.0",
     "react-native-gesture-handler": "~1.7.0",
+    "react-native-grid-component": "^2.0.1",
     "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "3.1.4",
     "react-native-screens": "~2.10.1",

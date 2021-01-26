@@ -16,9 +16,15 @@ const Images = {
     2: require("../../assets/images/mustachions/mustachion_3.png"),
   },
   room: {
+    bgDay: require("../../assets/images/room.jpg"),
+    bgNight: require("../../assets/images/room_dark.png"),
     windowDay: require("../../assets/images/room_elements/sunny_day_window.png"),
     windowNight: require("../../assets/images/room_elements/starry_night_window.png"),
   },
+};
+
+const Videos = {
+  hatch: require("../../assets/videos/egg.mp4"),
 };
 
 const loadAssets = async () => {
@@ -33,4 +39,4 @@ const loadAssets = async () => {
   return true;
 };
 
-export { loadAssets, Sounds, Images };
+export { loadAssets, Sounds, Images, Videos };

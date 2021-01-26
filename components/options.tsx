@@ -1,16 +1,13 @@
 import React from "react";
 import { Pressable, Image, Text, StyleSheet, View } from "react-native";
 import SCREEN from "../constants/screen";
+import ItemsMenu from "./itemsMenu";
 
 export default (props: any) => {
   return (
     <View style={[styles.center, styles.container]}>
       <View style={[styles.center, styles.menu]}>
-        <Text style={styles.text}>Some</Text>
-        <Text style={styles.text}>Options</Text>
-        <Text style={styles.text}>Might</Text>
-        <Text style={styles.text}>Go</Text>
-        <Text style={styles.text}>Here</Text>
+        <ItemsMenu></ItemsMenu>
         <Pressable
           style={[styles.center, styles.button]}
           onPress={() => props.navigation.popToTop()}

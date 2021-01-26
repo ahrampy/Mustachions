@@ -7,7 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SCREEN from "./constants/screen";
 import STATE from "./constants/globalState";
 //* components *//
-import Menu from "./components/menu";
+import Menu from "./components/mainMenu";
 import Store from "./components/store";
 import Options from "./components/options";
 import Game from "./components/game";

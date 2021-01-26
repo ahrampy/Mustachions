@@ -17,7 +17,7 @@ import { GameLoop } from "react-native-game-engine";
 //* expo *//
 import { Video } from "expo-av";
 //* assets *//
-import { Sounds, Images } from "./entities/assets"; // TODO move final assets
+import { Sounds, Images, Videos } from "./entities/assets"; // TODO move final assets
 
 // * DOCS
 //  * SCROLLVIEW: https://reactnative.dev/docs/scrollview
@@ -55,7 +55,7 @@ export default function Game(props) {
 
   //* animations and time of day *//
   const update = ({ touches, screen, layout, time }) => {
-    let press = touches.find((x) => x.type === "press");
+    // let press = touches.find((x) => x.type === "press");
     // if (press && (introVisible || fishBowlVisible)) {
     //   setIntroVisible(false)
     //   setFishBowlVisible(false)
@@ -117,7 +117,7 @@ export default function Game(props) {
       <Modal style={styles.modal} visible={introVisible} animationType={"fade"}>
         <Pressable onLongPress={() => setIntroVisible(false)}>
           <Video
-            source={require("../assets/videos/egg.mp4")}
+            source={Videos.hatch}
             rate={1.0}
             resizeMode="cover"
             shouldPlay
@@ -144,7 +144,7 @@ export default function Game(props) {
       <ScrollView horizontal={true} bounces={false}>
         <ImageBackground
           style={styles.backgroundImage}
-          source={require("../assets/images/room.jpg")}
+          source={Images.room.bgDay}
         >
           <GameLoop onUpdate={update}>
             <ImageBackground
@@ -159,8 +159,8 @@ export default function Game(props) {
               >
                 <Element
                   name={"books"}
-                  size={.14}
-                  position={{ top: 28, left: 3.5 }}
+                  size={0.14}
+                  position={{ top: 28, left: 4}}
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
@@ -168,7 +168,7 @@ export default function Game(props) {
                 />
                 <Element
                   name={"mirror"}
-                  size={.12}
+                  size={0.13}
                   position={{ top: 30, left: 30 }}
                   tiles={1}
                   frame={frame}
@@ -177,8 +177,8 @@ export default function Game(props) {
                 />
                 <Element
                   name={"piano"}
-                  size={.32}
-                  position={{ top: 44, left: 25 }}
+                  size={0.32}
+                  position={{ top: 44, left: 26 }}
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
@@ -186,8 +186,8 @@ export default function Game(props) {
                 />
                 <Element
                   name={"speaker"}
-                  size={.15}
-                  position={{ top: 53.5, left: 40 }}
+                  size={0.15}
+                  position={{ top: 53, left: 45 }}
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
@@ -196,8 +196,8 @@ export default function Game(props) {
                 <Element
                   name={"fish"}
                   press={() => showFishBowl()}
-                  size={.13}
-                  position={{ top: 55, left: 78 }}
+                  size={0.13}
+                  position={{ top: 57, left: 85 }}
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
@@ -205,22 +205,22 @@ export default function Game(props) {
                 />
                 <Element
                   name={"plant"}
-                  size={.08}
-                  position={{ top: 34, left: 64 }}
+                  size={0.08}
+                  position={{ top: 34, left: 72 }}
                   tiles={4}
                   frame={frame}
                   range={{ min: 0, max: 12 }}
                   src={require("../assets/images/room_elements/plant_1_sheet.png")}
                 />
-                <Element
+                {/* <Element
                   name={"text"}
-                  size={.10}
+                  size={0.1}
                   position={{ top: 1.51, left: 2 }}
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
                   src={require("../assets/images/text.png")}
-                />
+                /> */}
                 <Element
                   name={"mustachion"}
                   press={() => {
@@ -229,7 +229,7 @@ export default function Game(props) {
                       moveMust(false);
                     }, 2000);
                   }}
-                  size={.2}
+                  size={0.2}
                   position={{ top: 65, left: 25 }}
                   tiles={4}
                   frame={frame}
@@ -247,7 +247,7 @@ export default function Game(props) {
 
 const styles = StyleSheet.create({
   container: {
-    position: "relative",
+    flex: 1,
     height: SCREEN.height,
   },
   modal: {
