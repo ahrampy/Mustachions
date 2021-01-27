@@ -24,7 +24,7 @@ const Images = {
     bookshelfNight: require("../../assets/images/room/bookshelf_black.png"),
   },
   items: {
-    booksStandard: require("../../assets/images/room_elements/books.png"),
+    books: require("../../assets/images/room_elements/books.png"),
     mirror: require("../../assets/images/room_elements/mirror.png"),
     piano: require("../../assets/images/room_elements/piano.png"),
     speaker: require("../../assets/images/room_elements/speaker.png"),
@@ -38,6 +38,7 @@ const Images = {
 
 const Videos = {
   hatch: require("../../assets/videos/egg.mp4"),
+  goldfish: require("../../assets/videos/goldfish_animation.mp4"),
 };
 
 const loadAssets = async () => {

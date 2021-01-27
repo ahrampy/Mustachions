@@ -132,7 +132,7 @@ export default function Game(props) {
       >
         <Pressable onLongPress={() => hideFishBowl()}>
           <Video
-            source={require("../assets/videos/goldfish_animation.mp4")}
+            source={Videos.goldfish}
             rate={1.0}
             resizeMode="cover"
             shouldPlay
@@ -229,15 +229,6 @@ export default function Game(props) {
                   range={{ min: 0, max: 12 }}
                   src={Images.items.seeds}
                 />
-                {/* <Element
-                  name={"text"}
-                  size={0.1}
-                  position={{ top: 1.51, left: 2 }}
-                  tiles={1}
-                  frame={frame}
-                  range={{ min: 0, max: 0 }}
-                  src={require("../assets/images/text.png")}
-                /> */}
                 <Element
                   name={"mustachion"}
                   press={() => {

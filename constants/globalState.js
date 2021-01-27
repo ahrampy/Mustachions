@@ -10,8 +10,7 @@ const STORE = {
   previous: [],
   items: {
     current: {
-      // bookshelf: "brown",
-      books: "standard",
+      books: "books",
       wall: "mirror",
       music: "piano",
       lamp: "standard",
@@ -19,7 +18,6 @@ const STORE = {
       plant: "seeds",
     },
     owned: {
-      // bookshelf: ["brown", "black"],
       books: ["standard"],
       wall: ["mirror"],
       lamp: ["standard"],

@@ -3,24 +3,32 @@ import { Image, Text, Pressable, StyleSheet, View } from "react-native";
 import Grid from "react-native-grid-component";
 import SCREEN from "../constants/screen";
 import STATE from "../constants/globalState";
-import { Images } from "./entities/assets"; 
+import { Images } from "./entities/assets";
 
-
-const item = (data, i) => {
+const Item = (name) => {
   return (
-    <View style={styles.item} key={i}>
-      {/* <Image source={}></Image> */}
+    <View style={styles.item}>
+      {/* <Text>{name}</Text> */}
     </View>
   );
 };
 
-export default function itemsMenu() {
+const Category = (data, i) => {
+  return (
+    <View style={styles.category} key={i}>
+      <Item name={data[1]} />
+      <Text>{data[0]}</Text>
+    </View>
+  );
+};
+
+export default function ItemsMenu() {
   return (
     <View style={styles.container}>
       <Grid
         data={Object.entries(STATE.get("items/current"))}
-        renderItem={item}
-        numColumns={2}
+        renderItem={Category}
+        numColumns={3}
         style={styles.grid}
       ></Grid>
     </View>
@@ -38,7 +46,12 @@ const styles = StyleSheet.create({
   grid: {
     flex: 1,
   },
+  category: {
+    flex: 1,
+  },
   item: {
     flex: 1,
+    width: "100%",
+    height: "100%"
   },
 });
