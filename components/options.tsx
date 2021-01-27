@@ -1,7 +1,7 @@
 import React from "react";
 import { Pressable, Image, Text, StyleSheet, View } from "react-native";
 import SCREEN from "../constants/screen";
-import ItemsMenu from "./itemsMenu";
+import ItemsMenu from "./ItemsMenu" ;
 
 export default (props: any) => {
   return (

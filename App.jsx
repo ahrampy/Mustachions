@@ -7,11 +7,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SCREEN from "./constants/screen";
 import STATE from "./constants/globalState";
 //* components *//
-import Menu from "./components/mainMenu";
-import Store from "./components/store";
-import Options from "./components/options";
-import Game from "./components/game";
-import Island from "./components/island";
+import Menu from "./components/MainMenu";
+import Store from "./components/Store";
+import Options from "./components/Options";
+import Game from "./components/Game";
+import Island from "./components/Island";
 //* assets *//
 import { loadAssets, Images } from "./components/entities/assets";
 //* expo *//

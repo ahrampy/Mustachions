@@ -8,7 +8,7 @@ const Sounds = {
 const Images = {
   interface: {
     text: require("../../assets/images/text.png"),
-    arrow: require("../../assets/images/interface/back_arrow.gif")
+    arrow: require("../../assets/images/interface/back_arrow.gif"),
   },
   mustachions: {
     0: require("../../assets/images/mustachions/mustachion_1.png"),
@@ -16,11 +16,24 @@ const Images = {
     2: require("../../assets/images/mustachions/mustachion_3.png"),
   },
   room: {
-    bgDay: require("../../assets/images/room.jpg"),
-    bgNight: require("../../assets/images/room_dark.png"),
-    windowDay: require("../../assets/images/room_elements/sunny_day_window.png"),
-    windowNight: require("../../assets/images/room_elements/starry_night_window.png"),
+    bgDay: require("../../assets/images/room/room.jpg"),
+    bgNight: require("../../assets/images/room/room_dark.png"),
+    windowDay: require("../../assets/images/room/sunny_day_window.png"),
+    windowNight: require("../../assets/images/room/starry_night_window.png"),
+    bookshelfDay: require("../../assets/images/room/bookshelf.png"),
+    bookshelfNight: require("../../assets/images/room/bookshelf_black.png"),
   },
+  items: {
+    booksStandard: require("../../assets/images/room_elements/books.png"),
+    mirror: require("../../assets/images/room_elements/mirror.png"),
+    piano: require("../../assets/images/room_elements/piano.png"),
+    speaker: require("../../assets/images/room_elements/speaker.png"),
+    lightOn: require("../../assets/images/room_elements/light_on.png"),
+    lightOff: require("../../assets/images/room_elements/light_off.png"),
+    fishBowl: require("../../assets/images/room_elements/fish_bowl.png"),
+    seeds: require("../../assets/images/room_elements/plant_1_sheet.png"),
+  },
+  
 };
 
 const Videos = {

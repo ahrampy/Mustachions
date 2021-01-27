@@ -6,7 +6,7 @@ export default (props: any) => {
   return (
     <View style={[styles.center, styles.container]}>
       <View style={[styles.center, styles.menu]}>
-        <Text style={styles.text}>Buy Some Shit</Text>
+        <Text style={styles.text}>Nothing here yet!!!</Text>
         <Pressable
           style={[styles.center, styles.button]}
           onPress={() => props.navigation.popToTop()}
