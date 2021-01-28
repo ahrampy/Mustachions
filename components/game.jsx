@@ -168,7 +168,7 @@ export default function Game(props) {
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
-                  src={Images.items.booksStandard}
+                  src={Images.items.books}
                 />
                 <Element
                   name={"mirror"}
@@ -206,8 +206,8 @@ export default function Game(props) {
                   range={{ min: 0, max: 0 }}
                   src={
                     timeOfDay > 12
-                      ? Images.items.lightOff
-                      : Images.items.lightOn
+                      ? Images.items.lampOff1
+                      : Images.items.lampOn1
                   }
                 />
                 <Element
@@ -218,7 +218,7 @@ export default function Game(props) {
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
-                  src={Images.items.fishBowl}
+                  src={Images.items.fish}
                 />
                 <Element
                   name={"plant"}
@@ -227,7 +227,7 @@ export default function Game(props) {
                   tiles={4}
                   frame={frame}
                   range={{ min: 0, max: 12 }}
-                  src={Images.items.seeds}
+                  src={Images.items.seedsSheet}
                 />
                 <Element
                   name={"mustachion"}

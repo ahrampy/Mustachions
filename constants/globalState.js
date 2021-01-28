@@ -10,18 +10,18 @@ const STORE = {
   previous: [],
   items: {
     current: {
-      books: "books",
+      lamp: "lampOn1",
       wall: "mirror",
       music: "piano",
-      lamp: "standard",
+      books: "books",
       animal: "fish",
       plant: "seeds",
     },
     owned: {
-      books: ["standard"],
+      lamp: ["lampOn1"],
       wall: ["mirror"],
-      lamp: ["standard"],
       music: ["piano"],
+      books: ["books"],
       animal: ["fish"],
       plant: ["seeds"],
     },

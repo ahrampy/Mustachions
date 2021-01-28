@@ -5,19 +5,20 @@ import SCREEN from "../constants/screen";
 import STATE from "../constants/globalState";
 import { Images } from "./entities/assets";
 
-const Item = (name) => {
+const Item = ({ name }) => {
   return (
     <View style={styles.item}>
-      {/* <Text>{name}</Text> */}
+        <Image style={styles.itemImage} source={Images.items[name]}></Image>
     </View>
   );
 };
 
 const Category = (data, i) => {
   return (
-    <View style={styles.category} key={i}>
-      <Item name={data[1]} />
-      <Text>{data[0]}</Text>
+    <View style={styles.category}>
+      <Pressable onPress={() => {console.log(data[1]);}}>
+        <Item name={data[1]} key={i} />
+      </Pressable>
     </View>
   );
 };
@@ -30,6 +31,7 @@ export default function ItemsMenu() {
         renderItem={Category}
         numColumns={3}
         style={styles.grid}
+        keyExtractor={(item, n) => n}
       ></Grid>
     </View>
   );
@@ -38,20 +40,27 @@ export default function ItemsMenu() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // height: SCREEN.height * 0.5,
     width: SCREEN.width * 0.8,
-    borderColor: "black",
-    borderWidth: 2,
+    // borderColor: "black",
+    // borderWidth: 2,
   },
   grid: {
     flex: 1,
   },
   category: {
     flex: 1,
+    borderColor: "black",
+    borderWidth: 2,
+    margin: 5,
   },
   item: {
     flex: 1,
-    width: "100%",
-    height: "100%"
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+  },
+  itemImage: {
+    width: 80,
+    height: 80,
   },
 });

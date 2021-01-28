@@ -28,12 +28,12 @@ const Images = {
     mirror: require("../../assets/images/room_elements/mirror.png"),
     piano: require("../../assets/images/room_elements/piano.png"),
     speaker: require("../../assets/images/room_elements/speaker.png"),
-    lightOn: require("../../assets/images/room_elements/light_on.png"),
-    lightOff: require("../../assets/images/room_elements/light_off.png"),
-    fishBowl: require("../../assets/images/room_elements/fish_bowl.png"),
-    seeds: require("../../assets/images/room_elements/plant_1_sheet.png"),
+    lampOn1: require("../../assets/images/room_elements/lamp_on_1.png"),
+    lampOff1: require("../../assets/images/room_elements/lamp_off_1.png"),
+    fish: require("../../assets/images/room_elements/fish.png"),
+    seeds: require("../../assets/images/room_elements/seeds.png"),
+    seedsSheet: require("../../assets/images/room_elements/seeds_sheet.png"),
   },
-  
 };
 
 const Videos = {
