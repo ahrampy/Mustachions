@@ -69,14 +69,15 @@ const STATE = {
     }
   },
   get: (path) => {
-    path = path.split("/");
+    const pathArr = path.split("/");
     let dest = STORE;
-    while (path.length > 1) {
-      dest = dest[path.shift()];
+    while (pathArr.length > 1) {
+      dest = dest[pathArr.shift()];
     }
-    if (dest[path[0]] !== undefined) {
-      return dest[path[0]];
+    if (dest[pathArr[0]] !== undefined) {
+      return dest[pathArr[0]];
     } else {
+      console.log(`error getting storage, incorrect path ${path}`);
       return false;
     }
   },

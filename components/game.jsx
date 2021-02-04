@@ -37,7 +37,7 @@ export default function Game(props) {
   const [hours, ding] = useState(STATE.get("hours"));
   const [days, dong] = useState(STATE.get("days"));
   //* start *//
-  const init = () => {
+  const addAudioSubscriptions = () => {
     const subs = [];
     subs.push(
       props.navigation.addListener("focus", () =>
@@ -51,7 +51,6 @@ export default function Game(props) {
     );
     return subs;
   };
-
   //* animations and time of day *//
   const update = ({ touches, screen, layout, time }) => {
     // let press = touches.find((x) => x.type === "press");
@@ -87,7 +86,7 @@ export default function Game(props) {
 
   //* on load *//
   useEffect(() => {
-    const subs = init();
+    const subs = addAudioSubscriptions();
     return () => subs.forEach((unsub) => unsub());
   }, []);
 
@@ -205,9 +204,7 @@ export default function Game(props) {
                   frame={frame}
                   range={{ min: 0, max: 0 }}
                   src={
-                    hours < 12
-                      ? Images.items.lampOff1
-                      : Images.items.lampOn1
+                    hours < 12 ? Images.items.lampOff1 : Images.items.lampOn1
                   }
                 />
                 <Element
