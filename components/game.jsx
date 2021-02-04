@@ -33,10 +33,9 @@ export default function Game(props) {
   const [frame, updateFrame] = useState(0);
   //* time *//
   const [seconds, tick] = useState(0);
-  const [minutes, tock] = useState(0);
-  const [hours, ding] = useState(0);
+  const [minutes, tock] = useState(STATE.get("minutes"));
+  const [hours, ding] = useState(STATE.get("hours"));
   const [days, dong] = useState(STATE.get("days"));
-  const [timeOfDay, setTime] = useState(STATE.get("timeOfDay"));
   //* start *//
   const init = () => {
     const subs = [];
@@ -69,20 +68,21 @@ export default function Game(props) {
       tick(time.current);
       tock(minutes + 1);
       updateFrame((frame + 1) % 32);
+      STATE.set("minutes", minutes);
     }
     if (minutes >= 60) {
       tock(0);
+      STATE.set("minutes", minutes);
       ding(hours + 1);
-      STATE.set("timeOfDay", timeOfDay);
-      if (hours === 12) {
-        setTime((timeOfDay + 1) % 24);
-      } else if (hours >= 24) {
-        setTime((timeOfDay + 1) % 24);
-        ding(0);
-        dong(days + 1);
-        STATE.set("days", days);
-      }
+      STATE.set("hours", hours);
     }
+    if (hours >= 24) {
+      ding(0);
+      STATE.set("hours", hours);
+      dong(days + 1);
+      STATE.set("days", days);
+    }
+    // console.log(`${days} : ${hours} : ${minutes} : ${seconds}`);
   };
 
   //* on load *//
@@ -144,19 +144,19 @@ export default function Game(props) {
       <ScrollView horizontal={true} bounces={false}>
         <ImageBackground
           style={styles.backgroundImage}
-          source={timeOfDay > 12 ? Images.room.bgDay : Images.room.bgNight}
+          source={hours < 12 ? Images.room.bgDay : Images.room.bgNight}
         >
           <GameLoop onUpdate={update}>
             <ImageBackground
               style={styles.backgroundImage}
               source={
-                timeOfDay > 12 ? Images.room.windowDay : Images.room.windowNight
+                hours < 12 ? Images.room.windowDay : Images.room.windowNight
               }
             >
               <ImageBackground
                 style={styles.backgroundImage}
                 source={
-                  timeOfDay > 12
+                  hours < 12
                     ? Images.room.bookshelfDay
                     : Images.room.bookshelfNight
                 }
@@ -205,7 +205,7 @@ export default function Game(props) {
                   frame={frame}
                   range={{ min: 0, max: 0 }}
                   src={
-                    timeOfDay > 12
+                    hours < 12
                       ? Images.items.lampOff1
                       : Images.items.lampOn1
                   }

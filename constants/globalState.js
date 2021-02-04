@@ -1,9 +1,11 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const STORE = {
-  timeOfDay: 0,
+  minutes: 0,
+  hours: 0,
   days: 0,
   mustachion: {
+    hatched: false, // TODO add hatching logic
     type: 0,
     age: 0,
   },
@@ -41,7 +43,7 @@ const STATE = {
       }
       return true;
     } catch (e) {
-      console.log("local storage data fetchStorage failed ~~ " + e.message);
+      console.log("fetchStorage failed ~~ " + e.message);
       return false;
     }
   },
@@ -51,12 +53,12 @@ const STATE = {
       await AsyncStorage.setItem("@game_Data", jsonValue);
       return true;
     } catch (e) {
-      console.log("error saving to local storage ~~ " + e.message);
+      console.log("updateStorage failed ~~ " + e.message);
       return false;
     }
   },
   mapState: (data, obj) => {
-    for (let key in data) {
+    for (const key in data) {
       if (Array.isArray(data[key])) {
         obj[key] = data[key].slice(0);
       } else if (typeof data[key] === "object" && data[key] !== null) {
