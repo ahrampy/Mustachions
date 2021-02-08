@@ -26,7 +26,7 @@ import { Sounds, Images, Videos } from "./entities/assets";
 
 export default function Game(props) {
   //* modals *//
-  const [introVisible, setIntroVisible] = useState(true); // needs to hatch // TODO add to STATE
+  const [introVisible, setIntroVisible] = useState(false); // needs to hatch // TODO add to STATE
   const [fishBowlVisible, setFishBowlVisible] = useState(false);
   //* actions *//
   const [mustMoving, moveMust] = useState(false);
@@ -86,6 +86,11 @@ export default function Game(props) {
 
   //* on load *//
   useEffect(() => {
+    // STATE.set("mustachion/hatched", false);
+    if (!STATE.get("mustachion/hatched")) {
+      setIntroVisible(true);
+      STATE.set("mustachion/hatched", true);
+    }
     const subs = addAudioSubscriptions();
     return () => subs.forEach((unsub) => unsub());
   }, []);
