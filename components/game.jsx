@@ -26,7 +26,7 @@ import { Sounds, Images, Videos } from "./entities/assets";
 
 export default function Game(props) {
   //* modals *//
-  const [introVisible, setIntroVisible] = useState(false); // needs to hatch // TODO add to STATE
+  const [introVisible, setIntroVisible] = useState(false); // needs to hatch
   const [fishBowlVisible, setFishBowlVisible] = useState(false);
   //* actions *//
   const [mustMoving, moveMust] = useState(false);
@@ -146,11 +146,11 @@ export default function Game(props) {
         </Pressable>
       </Modal>
       <ScrollView horizontal={true} bounces={false}>
-        <ImageBackground
-          style={styles.backgroundImage}
-          source={hours < 12 ? Images.room.bgDay : Images.room.bgNight}
-        >
-          <GameLoop onUpdate={update}>
+        <GameLoop onUpdate={update}>
+          <ImageBackground
+            style={styles.backgroundImage}
+            source={hours < 12 ? Images.room.bgDay : Images.room.bgNight}
+          >
             <ImageBackground
               style={styles.backgroundImage}
               source={
@@ -248,8 +248,8 @@ export default function Game(props) {
                 />
               </ImageBackground>
             </ImageBackground>
-          </GameLoop>
-        </ImageBackground>
+          </ImageBackground>
+        </GameLoop>
       </ScrollView>
     </View>
   );

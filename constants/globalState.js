@@ -5,7 +5,7 @@ const STORE = {
   hours: 0,
   days: 0,
   mustachion: {
-    hatched: false, // TODO add hatching logic
+    hatched: false,
     type: 0,
     age: 0,
   },
