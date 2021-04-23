@@ -11,7 +11,7 @@ import {
 import SCREEN from "../constants/screen";
 import STATE from "../constants/globalState";
 //* sub-components *//
-import Element from "./Element";
+import { Element, Elements } from "./Elements";
 //* game engine *//
 import { GameLoop } from "react-native-game-engine";
 //* expo *//
@@ -31,6 +31,8 @@ export default function Game(props) {
   //* actions *//
   const [mustMoving, moveMust] = useState(false);
   const [frame, updateFrame] = useState(0);
+  //* elements *//
+  const [currEles, getCurrEles] = useState({});
   //* time *//
   const [seconds, tick] = useState(0);
   const [minutes, tock] = useState(STATE.get("minutes"));
@@ -87,6 +89,7 @@ export default function Game(props) {
   //* on load *//
   useEffect(() => {
     // STATE.set("mustachion/hatched", false);
+    getCurrEles(STATE.get("items/current"));
     if (!STATE.get("mustachion/hatched")) {
       setIntroVisible(true);
       STATE.set("mustachion/hatched", true);
@@ -165,7 +168,8 @@ export default function Game(props) {
                     : Images.room.bookshelfNight
                 }
               >
-                <Element
+                <Elements eles={currEles} frame={frame}></Elements>
+                {/* <Element
                   name={"books"}
                   size={0.14}
                   position={{ top: 28, left: 4 }}
@@ -182,8 +186,8 @@ export default function Game(props) {
                   frame={frame}
                   range={{ min: 0, max: 0 }}
                   src={Images.items.mirror}
-                />
-                <Element
+                /> */}
+                {/* <Element
                   name={"piano"}
                   size={0.35}
                   position={{ top: 44, left: 26 }}
@@ -208,9 +212,7 @@ export default function Game(props) {
                   tiles={1}
                   frame={frame}
                   range={{ min: 0, max: 0 }}
-                  src={
-                    hours < 12 ? Images.items.lampOff : Images.items.lampOn
-                  }
+                  src={hours < 12 ? Images.items.lampOff : Images.items.lampOn}
                 />
                 <Element
                   name={"fish"}
@@ -230,7 +232,7 @@ export default function Game(props) {
                   frame={frame}
                   range={{ min: 0, max: 12 }}
                   src={Images.items.seedsSheet}
-                />
+                /> */}
                 <Element
                   name={"mustachion"}
                   press={() => {

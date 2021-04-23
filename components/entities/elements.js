@@ -1,0 +1,68 @@
+const ELEMENTS = {
+  books: {
+    size: 0.14,
+    position: { top: 34, left: 9 },
+    tiles: 1,
+    // frame: frame,
+    range: { min: 0, max: 0 },
+    // src: Images.items.books,
+  },
+  mirror: {
+    size: 0.13,
+    position: { top: 35, left: 35 },
+    tiles: 1,
+    // frame: frame,
+    range: { min: 0, max: 0 },
+    // src: Images.items.mirror,
+  },
+  piano: {
+    size: 0.35,
+    position: { top: 50, left: 35 },
+    tiles: 1,
+    // frame: frame,
+    range: { min: 0, max: 0 },
+    // src: Images.items.mirror,
+  },
+  speaker: {
+    size: 0.18,
+    position: { top: 53, left: 45 },
+    tiles: 1,
+    // frame: frame,
+    range: { min: 0, max: 0 },
+    // src: Images.items.mirror,
+  },
+  lampOn: {
+    size: 0.5,
+    position: { top: 270, left: 500 },
+    tiles: 1,
+    // frame: frame,
+    range: { min: 0, max: 0 },
+    // src: Images.items.mirror,
+  },
+  fish: {
+    size: 0.15,
+    position: { top: 60, left: 92 },
+    tiles: 1,
+    // frame: frame,
+    range: { min: 0, max: 0 },
+    // src: Images.items.mirror,
+  },
+  seeds: {
+    size: 0.08,
+    position: { top: 39.5, left: 77 },
+    tiles: 1,
+    // frame: frame,
+    range: { min: 0, max: 0 },
+    // src: Images.items.mirror,
+  },
+  computerOn: {
+    size: 0.22,
+    position: { top: 55, left: 35 },
+    tiles: 1,
+    // frame: frame,
+    range: { min: 0, max: 0 },
+    // src: Images.items.mirror,
+  },
+};
+
+export { ELEMENTS };
