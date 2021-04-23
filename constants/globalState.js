@@ -12,17 +12,17 @@ const STORE = {
   previous: [],
   items: {
     current: {
-      lamp: "lampOn1",
+      lamp: "lampOn",
       wall: "mirror",
-      music: "piano",
+      desk: "piano",
       books: "books",
       animal: "fish",
       plant: "seeds",
     },
     owned: {
-      lamp: ["lampOn1"],
+      lamp: ["lampOn"],
       wall: ["mirror"],
-      music: ["piano"],
+      desk: ["piano", "computerOn"],
       books: ["books"],
       animal: ["fish"],
       plant: ["seeds"],

@@ -209,7 +209,7 @@ export default function Game(props) {
                   frame={frame}
                   range={{ min: 0, max: 0 }}
                   src={
-                    hours < 12 ? Images.items.lampOff1 : Images.items.lampOn1
+                    hours < 12 ? Images.items.lampOff : Images.items.lampOn
                   }
                 />
                 <Element
