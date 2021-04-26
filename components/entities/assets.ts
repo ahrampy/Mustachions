@@ -1,6 +1,6 @@
 import { Audio, Video } from "expo-av";
 
-const Sounds = {
+const Sounds: any = {
   greyDay: null,
   fishBowl: null,
 };
