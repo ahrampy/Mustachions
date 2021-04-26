@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FlatList, Image, Pressable, StyleSheet, View } from "react-native";
 import SCREEN from "../constants/screen";
 import STATE from "../constants/globalState";
+import { ELEMENTS } from "./entities/elements";
 import { Images } from "./entities/assets";
 
 export default function ItemsMenu() {
@@ -9,9 +10,15 @@ export default function ItemsMenu() {
   const [selected, selectItem] = useState(null);
 
   const Item = ({ name }) => {
+    const { tiles, size, src } = ELEMENTS[name];
+    const margin = tiles > 1 ? size * SCREEN.height * tiles - 40 : 0;
+
     return (
       <View style={styles.item}>
-        <Image style={styles.itemImage} source={Images.items[name]}></Image>
+        <Image
+          style={{ width: 80, height: 80 * tiles, marginTop: margin }}
+          source={Images.items[src[0]]}
+        ></Image>
       </View>
     );
   };
@@ -107,10 +114,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 10,
-  },
-  itemImage: {
-    width: 80,
-    height: 80,
+    overflow: "hidden",
+    height: 100,
   },
 });

@@ -6,10 +6,15 @@ import { Images } from "./entities/assets";
 //* element objects *//
 import { ELEMENTS } from "./entities/elements";
 
-function Elements({ eles, frame }) {
+function Elements({ eles, frame, mode }) {
   if (!eles) return [];
   const components = Object.values(eles).map((ele, i) => {
     const obj = ELEMENTS[ele];
+    const src = obj.modes
+      ? mode === "day"
+        ? obj.src[0]
+        : obj.src[1]
+      : obj.src[0];
     return (
       <Element
         key={i}
@@ -18,7 +23,7 @@ function Elements({ eles, frame }) {
         tiles={obj.tiles}
         range={obj.range}
         frame={frame}
-        src={Images.items[ele]}
+        src={Images.items[src]}
       ></Element>
     );
   });

@@ -12,7 +12,7 @@ const STORE = {
   previous: [],
   items: {
     current: {
-      lamp: "lampOn",
+      lamp: "lamp",
       wall: "mirror",
       desk: "piano",
       books: "books",
@@ -20,9 +20,9 @@ const STORE = {
       plant: "seeds",
     },
     owned: {
-      lamp: ["lampOn"],
+      lamp: ["lamp"],
       wall: ["mirror"],
-      desk: ["piano", "computerOn"],
+      desk: ["piano", "computer"],
       books: ["books"],
       animal: ["fish"],
       plant: ["seeds"],
@@ -43,7 +43,7 @@ const STATE = {
       }
       return true;
     } catch (e) {
-      console.log("fetchStorage failed ~~ " + e.message);
+      console.log("fetchStorage failed: " + e.message);
       return false;
     }
   },
@@ -53,7 +53,7 @@ const STATE = {
       await AsyncStorage.setItem("@game_Data", jsonValue);
       return true;
     } catch (e) {
-      console.log("updateStorage failed ~~ " + e.message);
+      console.log("updateStorage failed: " + e.message);
       return false;
     }
   },
@@ -77,7 +77,7 @@ const STATE = {
     if (dest[pathArr[0]] !== undefined) {
       return dest[pathArr[0]];
     } else {
-      console.log(`error getting storage, incorrect path ${path}`);
+      console.log(`error getting storage, incorrect path: ${path}`);
       return false;
     }
   },

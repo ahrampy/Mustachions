@@ -38,6 +38,8 @@ export default function Game(props) {
   const [minutes, tock] = useState(STATE.get("minutes"));
   const [hours, ding] = useState(STATE.get("hours"));
   const [days, dong] = useState(STATE.get("days"));
+  const [mode, switchMode] = useState(hours < 12 ? "day" : "night");
+  // const {}
   //* start *//
   const addAudioSubscriptions = () => {
     const subs = [];
@@ -94,8 +96,9 @@ export default function Game(props) {
       setIntroVisible(true);
       STATE.set("mustachion/hatched", true);
     }
-    const subs = addAudioSubscriptions();
-    return () => subs.forEach((unsub) => unsub());
+    // !TODO uncomment for sound
+    // const subs = addAudioSubscriptions();
+    // return () => subs.forEach((unsub) => unsub());
   }, []);
 
   useEffect(() => {
@@ -107,6 +110,7 @@ export default function Game(props) {
     };
   }, [introVisible]);
 
+  //* onPresses *//
   const showFishBowl = () => {
     Sounds.greyDay.sound.pauseAsync();
     Sounds.fishBowl.sound.playAsync();
@@ -152,23 +156,23 @@ export default function Game(props) {
         <GameLoop onUpdate={update}>
           <ImageBackground
             style={styles.backgroundImage}
-            source={hours < 12 ? Images.room.bgDay : Images.room.bgNight}
+            source={mode === "day" ? Images.room.bgDay : Images.room.bgNight}
           >
             <ImageBackground
               style={styles.backgroundImage}
               source={
-                hours < 12 ? Images.room.windowDay : Images.room.windowNight
+                mode === "day" ? Images.room.windowDay : Images.room.windowNight
               }
             >
               <ImageBackground
                 style={styles.backgroundImage}
                 source={
-                  hours < 12
+                  mode === "day"
                     ? Images.room.bookshelfDay
                     : Images.room.bookshelfNight
                 }
               >
-                <Elements eles={currEles} frame={frame}></Elements>
+                <Elements eles={currEles} frame={frame} mode={mode}></Elements>
                 {/* <Element
                   name={"books"}
                   size={0.14}
