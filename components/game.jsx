@@ -79,6 +79,7 @@ export default function Game(props) {
       ding(hours + 1);
       STATE.set("hours", hours);
     }
+    if (hours >= 12) switchMode("night");
     if (hours >= 24) {
       ding(0);
       STATE.set("hours", hours);
