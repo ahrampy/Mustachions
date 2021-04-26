@@ -78,14 +78,16 @@ export default function Game(props) {
       STATE.set("minutes", minutes);
       ding(hours + 1);
       STATE.set("hours", hours);
+      if (hours == 12) switchMode("night");
     }
-    if (hours >= 12) switchMode("night");
     if (hours >= 24) {
+      switchMode("day");
       ding(0);
       STATE.set("hours", hours);
       dong(days + 1);
       STATE.set("days", days);
     }
+    // console.log(mode);
     // console.log(`${days} : ${hours} : ${minutes} : ${seconds}`);
   };
 
