@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "Bubs.app"
-               BlueprintName = "Bubs"
-               ReferencedContainer = "container:Bubs.xcodeproj">
+               BuildableName = "Mustachions.app"
+               BlueprintName = "Mustachions"
+               ReferencedContainer = "container:Mustachions.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "BubsTests.xctest"
-               BlueprintName = "BubsTests"
-               ReferencedContainer = "container:Bubs.xcodeproj">
+               BuildableName = "MustachionsTests.xctest"
+               BlueprintName = "MustachionsTests"
+               ReferencedContainer = "container:Mustachions.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Bubs.app"
-            BlueprintName = "Bubs"
-            ReferencedContainer = "container:Bubs.xcodeproj">
+            BuildableName = "Mustachions.app"
+            BlueprintName = "Mustachions"
+            ReferencedContainer = "container:Mustachions.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Bubs.app"
-            BlueprintName = "Bubs"
-            ReferencedContainer = "container:Bubs.xcodeproj">
+            BuildableName = "Mustachions.app"
+            BlueprintName = "Mustachions"
+            ReferencedContainer = "container:Mustachions.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

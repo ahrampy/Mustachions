@@ -45,11 +45,11 @@ const Videos = {
 
 const loadAssets = async () => {
   Sounds.greyDay = await Audio.Sound.createAsync(
-    require("../../assets/audio/grey_day.wav"),
+    require("../../assets/audio/grey_day.mp3"),
     { isLooping: true }
   );
   Sounds.fishBowl = await Audio.Sound.createAsync(
-    require("../../assets/audio/fish_sound.wav"),
+    require("../../assets/audio/fish_sound.mp3"),
     { isLooping: true }
   );
   return true;

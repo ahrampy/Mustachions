@@ -1,15 +1,13 @@
 {
-  "name": "Bubs",
-  "displayName": "Bubs",
+  "name": "Mustachions",
+  "displayName": "Mustachions",
   "expo": {
-    "name": "Bubs",
-    "slug": "Bubs",
+    "name": "Mustachions",
+    "slug": "Mustachions",
     "version": "1.0.0",
     "orientation": "portrait",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "description": "lil prototype bubs game",
-    "githubUrl": "https://github.com/ahrampy/Bubs"
+    "assetBundlePatterns": ["**/*"],
+    "description": "lil prototype Mustachions game",
+    "githubUrl": "https://github.com/ahrampy/Mustachions"
   }
 }

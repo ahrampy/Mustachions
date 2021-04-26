@@ -100,8 +100,8 @@ export default function Game(props) {
       STATE.set("mustachion/hatched", true);
     }
     // !TODO uncomment for sound
-    // const subs = addAudioSubscriptions();
-    // return () => subs.forEach((unsub) => unsub());
+    const subs = addAudioSubscriptions();
+    return () => subs.forEach((unsub) => unsub());
   }, []);
 
   useEffect(() => {
