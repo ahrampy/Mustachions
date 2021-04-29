@@ -32,7 +32,8 @@ export default function Game(props) {
   const [mustMoving, moveMust] = useState(false);
   const [frame, updateFrame] = useState(0);
   //* elements *//
-  const [currEles, getCurrEles] = useState({});
+  const [must, getCurrMust] = useState(STATE.get("mustachion/type"));
+  const [currEles, getCurrEles] = useState(STATE.get("items/current"));
   //* time *//
   const [seconds, tick] = useState(0);
   const [minutes, tock] = useState(STATE.get("minutes"));
@@ -94,14 +95,13 @@ export default function Game(props) {
   //* on load *//
   useEffect(() => {
     // STATE.set("mustachion/hatched", false);
-    getCurrEles(STATE.get("items/current"));
     if (!STATE.get("mustachion/hatched")) {
       setIntroVisible(true);
       STATE.set("mustachion/hatched", true);
     }
     // !TODO uncomment for sound
-    const subs = addAudioSubscriptions();
-    return () => subs.forEach((unsub) => unsub());
+    // const subs = addAudioSubscriptions();
+    // return () => subs.forEach((unsub) => unsub());
   }, []);
 
   useEffect(() => {
@@ -114,10 +114,12 @@ export default function Game(props) {
   }, [introVisible]);
 
   //* onPresses *//
-  const showFishBowl = () => {
-    Sounds.greyDay.sound.pauseAsync();
-    Sounds.fishBowl.sound.playAsync();
-    setFishBowlVisible(true);
+  const fullscreen = {
+    showFishBowl: () => {
+      Sounds.greyDay.sound.pauseAsync();
+      Sounds.fishBowl.sound.playAsync();
+      setFishBowlVisible(true);
+    },
   };
 
   const hideFishBowl = () => {
@@ -175,7 +177,12 @@ export default function Game(props) {
                     : Images.room.bookshelfNight
                 }
               >
-                <Elements eles={currEles} frame={frame} mode={mode}></Elements>
+                <Elements
+                  eles={currEles}
+                  frame={frame}
+                  mode={mode}
+                  fullscreen={fullscreen}
+                ></Elements>
                 {/* <Element
                   name={"books"}
                   size={0.14}
@@ -253,7 +260,7 @@ export default function Game(props) {
                   tiles={4}
                   frame={frame}
                   range={{ min: 0, max: mustMoving ? 32 : 0 }}
-                  src={Images.mustachions[STATE.get("mustachion/type")]}
+                  src={Images.mustachions[must]}
                 />
               </ImageBackground>
             </ImageBackground>

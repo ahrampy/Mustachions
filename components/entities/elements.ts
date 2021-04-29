@@ -4,7 +4,8 @@ interface ELEMENTS {
    size: number,
    tiles: number,
    position: object,
-   range: object,
+   range: object
+   press: string,
    src: object,
  }
 }
@@ -16,6 +17,7 @@ const ELEMENTS = {
     tiles: 1,
     position: { top: 34, left: 9 },
     range: { min: 0, max: 0 },
+    press: null,
     src: ["books"],
   },
   mirror: {
@@ -24,6 +26,7 @@ const ELEMENTS = {
     tiles: 1,
     position: { top: 35, left: 35 },
     range: { min: 0, max: 0 },
+    press: null,
     src: ["mirror"],
   },
   piano: {
@@ -32,6 +35,7 @@ const ELEMENTS = {
     tiles: 1,
     position: { top: 50, left: 35 },
     range: { min: 0, max: 0 },
+    press: null,
     src: ["piano"],
   },
   speaker: {
@@ -40,6 +44,7 @@ const ELEMENTS = {
     tiles: 1,
     position: { top: 53, left: 45 },
     range: { min: 0, max: 0 },
+    press: null,
     src: ["speaker"],
   },
   lamp: {
@@ -48,6 +53,7 @@ const ELEMENTS = {
     tiles: 1,
     position: { top: 35, left: 60 },
     range: { min: 0, max: 0 },
+    press: null,
     src: ["lampDay", "lampNight"],
   },
   fish: {
@@ -56,6 +62,7 @@ const ELEMENTS = {
     tiles: 1,
     position: { top: 60, left: 92 },
     range: { min: 0, max: 0 },
+    press: "showFishBowl",
     src: ["fish"],
   },
   seeds: {
@@ -64,6 +71,7 @@ const ELEMENTS = {
     tiles: 4,
     position: { top: 39.5, left: 77 },
     range: { min: 0, max: 12 },
+    press: null,
     src: ["seeds"],
   },
   computer: {
@@ -72,6 +80,7 @@ const ELEMENTS = {
     tiles: 1,
     position: { top: 55, left: 35 },
     range: { min: 0, max: 0 },
+    press: null,
     src: ["computerDay", "computerNight"],
   },
 };

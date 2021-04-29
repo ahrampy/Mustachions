@@ -6,24 +6,21 @@ import { Images } from "./entities/assets";
 //* element objects *//
 import { ELEMENTS } from "./entities/elements";
 
-function Elements({ eles, frame, mode }) {
+function Elements({ eles, frame, mode, fullscreen }) {
   if (!eles) return [];
   const components = Object.values(eles).map((ele, i) => {
-    const obj = ELEMENTS[ele];
-    const src = obj.modes
-      ? mode === "day"
-        ? obj.src[0]
-        : obj.src[1]
-      : obj.src[0];
+    const { modes, src, size, position, tiles, range, press } = ELEMENTS[ele];
+    const source = modes ? (mode === "day" ? src[0] : src[1]) : src[0];
     return (
       <Element
         key={i}
-        size={obj.size}
-        position={obj.position}
-        tiles={obj.tiles}
-        range={obj.range}
+        size={size}
+        position={position}
+        tiles={tiles}
+        range={range}
         frame={frame}
-        src={Images.items[src]}
+        press={fullscreen[press]}
+        src={Images.items[source]}
       ></Element>
     );
   });
