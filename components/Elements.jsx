@@ -14,6 +14,7 @@ function Elements({ eles, frame, mode, fullscreen }) {
     return (
       <Element
         key={i}
+        name={ele}
         size={size}
         position={position}
         tiles={tiles}

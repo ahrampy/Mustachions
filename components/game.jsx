@@ -94,14 +94,13 @@ export default function Game(props) {
 
   //* on load *//
   useEffect(() => {
-    // STATE.set("mustachion/hatched", false);
+    // STATE.set("mustachion/hatched", false); //! for testing
     if (!STATE.get("mustachion/hatched")) {
       setIntroVisible(true);
       STATE.set("mustachion/hatched", true);
     }
-    // !TODO uncomment for sound
-    // const subs = addAudioSubscriptions();
-    // return () => subs.forEach((unsub) => unsub());
+    const subs = addAudioSubscriptions();
+    return () => subs.forEach((unsub) => unsub());
   }, []);
 
   useEffect(() => {
@@ -113,7 +112,7 @@ export default function Game(props) {
     };
   }, [introVisible]);
 
-  //* onPresses *//
+  //* onPressZooms *//
   const fullscreen = {
     showFishBowl: () => {
       Sounds.greyDay.sound.pauseAsync();
@@ -122,6 +121,7 @@ export default function Game(props) {
     },
   };
 
+  //* onPressZoomOuts *//
   const hideFishBowl = () => {
     Sounds.fishBowl.sound.pauseAsync();
     Sounds.greyDay.sound.playAsync();
@@ -146,7 +146,7 @@ export default function Game(props) {
         visible={fishBowlVisible}
         animationType={"fade"}
       >
-        <Pressable onLongPress={() => hideFishBowl()}>
+        <Pressable onLongPress={hideFishBowl}>
           <Video
             source={Videos.goldfish}
             rate={1.0}
@@ -183,70 +183,6 @@ export default function Game(props) {
                   mode={mode}
                   fullscreen={fullscreen}
                 ></Elements>
-                {/* <Element
-                  name={"books"}
-                  size={0.14}
-                  position={{ top: 28, left: 4 }}
-                  tiles={1}
-                  frame={frame}
-                  range={{ min: 0, max: 0 }}
-                  src={Images.items.books}
-                />
-                <Element
-                  name={"mirror"}
-                  size={0.13}
-                  position={{ top: 30, left: 30 }}
-                  tiles={1}
-                  frame={frame}
-                  range={{ min: 0, max: 0 }}
-                  src={Images.items.mirror}
-                /> */}
-                {/* <Element
-                  name={"piano"}
-                  size={0.35}
-                  position={{ top: 44, left: 26 }}
-                  tiles={1}
-                  frame={frame}
-                  range={{ min: 0, max: 0 }}
-                  src={Images.items.piano}
-                />
-                <Element
-                  name={"speaker"}
-                  size={0.18}
-                  position={{ top: 53, left: 45 }}
-                  tiles={1}
-                  frame={frame}
-                  range={{ min: 0, max: 0 }}
-                  src={Images.items.speaker}
-                />
-                <Element
-                  name={"light"}
-                  size={0.5}
-                  position={{ top: 28, left: 50 }}
-                  tiles={1}
-                  frame={frame}
-                  range={{ min: 0, max: 0 }}
-                  src={hours < 12 ? Images.items.lampOff : Images.items.lampOn}
-                />
-                <Element
-                  name={"fish"}
-                  press={() => showFishBowl()}
-                  size={0.15}
-                  position={{ top: 55, left: 87 }}
-                  tiles={1}
-                  frame={frame}
-                  range={{ min: 0, max: 0 }}
-                  src={Images.items.fish}
-                />
-                <Element
-                  name={"plant"}
-                  size={0.08}
-                  position={{ top: 34, left: 72 }}
-                  tiles={4}
-                  frame={frame}
-                  range={{ min: 0, max: 12 }}
-                  src={Images.items.seedsSheet}
-                /> */}
                 <Element
                   name={"mustachion"}
                   press={() => {
